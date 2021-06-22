@@ -16,62 +16,13 @@
     @stack('javascript')
 </head>
 <body class="c-app">
-<div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
-    <div class="c-sidebar-brand d-lg-down-none">
-        <svg class="c-sidebar-brand-full" width="118" height="46" alt="CoreUI Logo">
-            <use xlink:href="assets/brand/coreui.svg#full"></use>
-        </svg>
-        <svg class="c-sidebar-brand-minimized" width="46" height="46" alt="CoreUI Logo">
-            <use xlink:href="assets/brand/coreui.svg#signet"></use>
-        </svg>
-    </div>
-    <ul class="c-sidebar-nav">
-        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="index.html">
-                <svg class="c-sidebar-nav-icon">
-                    <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-speedometer"></use>
-                </svg>
-                Dashboard<span class="badge badge-info">NEW</span></a></li>
-        <li class="c-sidebar-nav-title">Extras</li>
-        <li class="c-sidebar-nav-item c-sidebar-nav-dropdown"><a
-                    class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
-                <svg class="c-sidebar-nav-icon">
-                    <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-star"></use>
-                </svg>
-                Pages</a>
-            <ul class="c-sidebar-nav-dropdown-items">
-                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="login.html" target="_top">
-                        <svg class="c-sidebar-nav-icon">
-                            <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-account-logout"></use>
-                        </svg>
-                        Login</a></li>
-                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="register.html" target="_top">
-                        <svg class="c-sidebar-nav-icon">
-                            <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-account-logout"></use>
-                        </svg>
-                        Register</a></li>
-                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="404.html" target="_top">
-                        <svg class="c-sidebar-nav-icon">
-                            <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-bug"></use>
-                        </svg>
-                        Error 404</a></li>
-                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="500.html" target="_top">
-                        <svg class="c-sidebar-nav-icon">
-                            <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-bug"></use>
-                        </svg>
-                        Error 500</a></li>
-            </ul>
-        </li>
-    </ul>
-    <button class="c-sidebar-minimizer c-class-toggler" type="button" data-target="_parent"
-            data-class="c-sidebar-minimized"></button>
-</div>
+@include('layouts.navigation')
 <div class="c-wrapper c-fixed-components">
     <header class="c-header c-header-light c-header-fixed c-header-with-subheader">
         <button class="c-header-toggler c-class-toggler d-lg-none mfe-auto" type="button" data-target="#sidebar"
                 data-class="c-sidebar-show">
-            <svg class="c-icon c-icon-lg">
-                <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-menu"></use>
-            </svg>
+            <i class="c-icon c-icon-lg fas fa-bars">
+            </i>
         </button>
         <a class="c-header-brand d-lg-none" href="#">
             <svg width="118" height="46" alt="CoreUI Logo">
@@ -80,15 +31,14 @@
         </a>
         <button class="c-header-toggler c-class-toggler mfs-3 d-md-down-none" type="button" data-target="#sidebar"
                 data-class="c-sidebar-lg-show" responsive="true">
-            <svg class="c-icon c-icon-lg">
-                <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-menu"></use>
-            </svg>
+            <i class="c-icon c-icon-lg fas fa-bars">
+            </i>
         </button>
-        <ul class="c-header-nav d-md-down-none">
-            <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="#">Dashboard</a></li>
-            <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="#">Users</a></li>
-            <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="#">Settings</a></li>
-        </ul>
+{{--        <ul class="c-header-nav d-md-down-none">--}}
+{{--            <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="#">Dashboard</a></li>--}}
+{{--            <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="#">Users</a></li>--}}
+{{--            <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="#">Settings</a></li>--}}
+{{--        </ul>--}}
         <ul class="c-header-nav ml-auto mr-4">
             <li class="c-header-nav-item d-md-down-none mx-2"><a class="c-header-nav-link" href="#">
                     <svg class="c-icon">
@@ -107,7 +57,7 @@
                 </a></li>
             <li class="c-header-nav-item dropdown"><a class="c-header-nav-link" data-toggle="dropdown" href="#"
                                                       role="button" aria-haspopup="true" aria-expanded="false">
-                    <div class="c-avatar"><img class="c-avatar-img" src="assets/img/avatars/6.jpg" alt="user@email.com">
+                    <div class="c-avatar"><img class="c-avatar-img" src="https://www.gravatar.com/avatar/{{ md5(strtolower(auth()->user()->email)) }}" alt="{{ auth()->user()->email }}">
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right pt-0">
@@ -150,15 +100,16 @@
                         </svg>
                         Projects<span class="badge badge-primary ml-auto">42</span></a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item " href="#">
                         <svg class="c-icon mr-2">
                             <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-lock-locked"></use>
                         </svg>
-                        Lock Account</a><a class="dropdown-item" href="#">
+                        Lock Account</a><a class="dropdown-item btn-logout" href="#">
                         <svg class="c-icon mr-2">
                             <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-account-logout"></use>
                         </svg>
                         Logout</a>
+                    <form action="{{ route('console.logout') }}" method="post" id="logout-form">@csrf</form>
                 </div>
             </li>
         </ul>
@@ -177,13 +128,20 @@
             @yield('content')
         </main>
         <footer class="c-footer">
-            <div><a href="https://coreui.io">CoreUI</a> © 2020 creativeLabs.</div>
-            <div class="ml-auto">Powered by&nbsp;<a href="https://coreui.io/">CoreUI</a></div>
+            <div><a href="https://coreui.io">{{ config('app.name') }}</a> © 2021.</div>
+{{--            <div class="ml-auto">Powered by&nbsp;<a href="https://coreui.io/">CoreUI</a></div>--}}
         </footer>
     </div>
 </div>
 
 <script src="{{ mix('js/app.js') }}"></script>
+<script type="text/javascript">
+    $(function () {
+        $('.btn-logout').on('click', function () {
+            $('#logout-form').submit();
+        })
+    })
+</script>
 @stack('javascript')
 </body>
 </html>
