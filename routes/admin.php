@@ -21,6 +21,12 @@ Route::prefix("/console")->name("console.")->group(function (){
     Route::middleware("auth:admin")->group(function (){
 
         Route::get("/", [\App\Http\Controllers\Console\DashboardController::class, 'index']);
+
+        // User Management
+        Route::resource('users', \App\Http\Controllers\Console\UserController::class);
+
+        // AF Management
+        Route::resource('affiliates', \App\Http\Controllers\Console\AfController::class);
     });
 
 });

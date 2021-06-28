@@ -91,6 +91,26 @@ return [
             'prefix_indexes' => true,
         ],
 
+        'crm' => [
+            'driver' => 'mysql',
+            'url' => env('DATABASE_URL'),
+            'host' => env('CRM_HOST', '127.0.0.1'),
+            'port' => env('CRM_PORT', '3306'),
+            'database' => env('CRM_DATABASE', 'forge'),
+            'username' => env('CRM_USERNAME', 'forge'),
+            'password' => env('CRM_PASSWORD', ''),
+            'unix_socket' => env('CRM_SOCKET', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+            ]) : [],
+        ],
+
     ],
 
     /*

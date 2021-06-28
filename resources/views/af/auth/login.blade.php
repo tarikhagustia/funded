@@ -6,7 +6,7 @@
             <div class="card-group">
                 <div class="card p-4">
                     <div class="card-body">
-                        <form action="{{ route('console.login') }}" method="post">
+                        <form action="{{ route('login') }}" method="post">
                             @csrf
                             <img src="https://bullishfx.id/wp-content/uploads/2020/07/bullish-logo-2-e1594917801368.png" class="mb-2">
                             <p class="text-muted">Hi, Affiliate! Login to your account</p>

@@ -13,7 +13,7 @@
     <meta name="msapplication-TileImage" content="assets/favicon/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
     <link href="{{ mix('css/style.css') }}" rel="stylesheet">
-    @stack('javascript')
+    @stack('stylesheet')
 </head>
 <body class="c-app">
 @include('layouts.navigation')
@@ -135,6 +135,8 @@
 </div>
 
 <script src="{{ mix('js/app.js') }}"></script>
+<script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
+@stack('javascript')
 <script type="text/javascript">
     $(function () {
         $('.btn-logout').on('click', function () {
@@ -142,6 +144,6 @@
         })
     })
 </script>
-@stack('javascript')
+
 </body>
 </html>
