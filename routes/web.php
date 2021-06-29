@@ -12,7 +12,7 @@ Route::post('/login', [AuthenticatedSessionController::class, 'store'])
      ->name("login-post");
 
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
-     ->middleware('auth')
+     ->middleware('auth:af')
      ->name('logout');
 
 Route::middleware('auth:af')->group(function(){

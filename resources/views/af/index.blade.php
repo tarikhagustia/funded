@@ -3,7 +3,7 @@
 @section('content')
     <div class="container-fluid">
         <div class="fade-in">
-            Hi, {{ auth()->user()->name }}
+            Hi {{ auth()->user()->name }}, this is Affiliate dashboard
         </div>
     </div>
 @endsection

@@ -16,7 +16,12 @@
     @stack('stylesheet')
 </head>
 <body class="c-app">
-@include('layouts.navigation')
+@if (auth()->user() instanceof \App\Models\Admin)
+    @include('layouts.navigation_admin')
+@else
+    @include('layouts.navigation_af')
+@endif
+
 <div class="c-wrapper c-fixed-components">
     <header class="c-header c-header-light c-header-fixed c-header-with-subheader">
         <button class="c-header-toggler c-class-toggler d-lg-none mfe-auto" type="button" data-target="#sidebar"
@@ -61,55 +66,19 @@
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right pt-0">
-                    <div class="dropdown-header bg-light py-2"><strong>Account</strong></div>
-                    <a class="dropdown-item" href="#">
-                        <svg class="c-icon mr-2">
-                            <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-bell"></use>
-                        </svg>
-                        Updates<span class="badge badge-info ml-auto">42</span></a><a class="dropdown-item" href="#">
-                        <svg class="c-icon mr-2">
-                            <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-envelope-open"></use>
-                        </svg>
-                        Messages<span class="badge badge-success ml-auto">42</span></a><a class="dropdown-item"
-                                                                                          href="#">
-                        <svg class="c-icon mr-2">
-                            <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-task"></use>
-                        </svg>
-                        Tasks<span class="badge badge-danger ml-auto">42</span></a><a class="dropdown-item" href="#">
-                        <svg class="c-icon mr-2">
-                            <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-comment-square"></use>
-                        </svg>
-                        Comments<span class="badge badge-warning ml-auto">42</span></a>
                     <div class="dropdown-header bg-light py-2"><strong>Settings</strong></div>
                     <a class="dropdown-item" href="#">
                         <svg class="c-icon mr-2">
                             <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-user"></use>
                         </svg>
-                        Profile</a><a class="dropdown-item" href="#">
-                        <svg class="c-icon mr-2">
-                            <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-settings"></use>
-                        </svg>
-                        Settings</a><a class="dropdown-item" href="#">
-                        <svg class="c-icon mr-2">
-                            <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-credit-card"></use>
-                        </svg>
-                        Payments<span class="badge badge-secondary ml-auto">42</span></a><a class="dropdown-item"
-                                                                                            href="#">
-                        <svg class="c-icon mr-2">
-                            <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-file"></use>
-                        </svg>
-                        Projects<span class="badge badge-primary ml-auto">42</span></a>
+                        Profile</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item " href="#">
-                        <svg class="c-icon mr-2">
-                            <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-lock-locked"></use>
-                        </svg>
-                        Lock Account</a><a class="dropdown-item btn-logout" href="#">
+                    <a class="dropdown-item btn-logout" href="#">
                         <svg class="c-icon mr-2">
                             <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-account-logout"></use>
                         </svg>
                         Logout</a>
-                    <form action="{{ route('console.logout') }}" method="post" id="logout-form">@csrf</form>
+                    <form action="{{ auth()->user() instanceof  \App\Models\Admin ? route('console.logout') :  route('logout') }}" method="post" id="logout-form">@csrf</form>
                 </div>
             </li>
         </ul>
