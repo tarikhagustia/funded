@@ -9,7 +9,6 @@
         <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="index.html">
                 <i class="c-sidebar-nav-icon fas fa-home"></i>
                 Dashboard<span class="badge badge-info">NEW</span></a></li>
-        <li class="c-sidebar-nav-title">Settings</li>
         <li class="c-sidebar-nav-item c-sidebar-nav-dropdown"><a
                     class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
                 <i class="c-sidebar-nav-icon fas fa-users"></i>
@@ -25,6 +24,15 @@
                 {{ __('AF Management') }}</a>
             <ul class="c-sidebar-nav-dropdown-items">
                 <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('console.affiliates.index') }}">{{ __('Affiliates') }}</a></li>
+            </ul>
+        </li>
+
+        <li class="c-sidebar-nav-item c-sidebar-nav-dropdown"><a
+                    class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+                <i class="c-sidebar-nav-icon fas fa-cogs"></i>
+                {{ __('Setting') }}</a>
+            <ul class="c-sidebar-nav-dropdown-items">
+                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('console.account-types.index') }}">{{ __('Account Types') }}</a></li>
             </ul>
         </li>
     </ul>

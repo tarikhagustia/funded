@@ -27,6 +27,9 @@ Route::prefix("/console")->name("console.")->group(function (){
 
         // AF Management
         Route::resource('affiliates', \App\Http\Controllers\Console\AfController::class);
+
+        // Setting Route
+        Route::resource('account-types', \App\Http\Controllers\Console\Setting\AccountTypeController::class);
     });
 
 });
