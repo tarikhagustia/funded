@@ -18,6 +18,11 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
 Route::middleware('auth:af')->group(function(){
     Route::get('/', [\App\Http\Controllers\Af\DashboardController::class, 'index']);
     Route::get('/dashboard', [\App\Http\Controllers\Af\DashboardController::class, 'index']);
+
+    Route::prefix('/members')->group(function(){
+        Route::get('/af-member', [\App\Http\Controllers\Af\AfMemberController::class, 'index'])->name('af.af-member');
+        Route::get('/treeview', [\App\Http\Controllers\Af\TreeviewController::class, 'index'])->name('af.treeview');
+    });
 });
 
 require __DIR__.'/admin.php';

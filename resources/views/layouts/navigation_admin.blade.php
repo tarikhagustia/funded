@@ -18,14 +18,14 @@
             </ul>
         </li>
 
-        <li class="c-sidebar-nav-item c-sidebar-nav-dropdown"><a
-                    class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
-                <i class="c-sidebar-nav-icon fas fa-user-plus"></i>
-                {{ __('AF Management') }}</a>
-            <ul class="c-sidebar-nav-dropdown-items">
-                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('console.affiliates.index') }}">{{ __('Affiliates') }}</a></li>
-            </ul>
-        </li>
+{{--        <li class="c-sidebar-nav-item c-sidebar-nav-dropdown"><a--}}
+{{--                    class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">--}}
+{{--                <i class="c-sidebar-nav-icon fas fa-user-plus"></i>--}}
+{{--                {{ __('AF Management') }}</a>--}}
+{{--            <ul class="c-sidebar-nav-dropdown-items">--}}
+{{--                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('console.affiliates.index') }}">{{ __('Affiliates') }}</a></li>--}}
+{{--            </ul>--}}
+{{--        </li>--}}
 
         <li class="c-sidebar-nav-item c-sidebar-nav-dropdown"><a
                     class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
