@@ -30,6 +30,9 @@ Route::prefix("/console")->name("console.")->group(function (){
 
         // Setting Route
         Route::resource('account-types', \App\Http\Controllers\Console\Setting\AccountTypeController::class);
+
+        // Commission Route
+        Route::resource('reports/commissions', \App\Http\Controllers\Console\Report\CommissionController::class);
     });
 
 });

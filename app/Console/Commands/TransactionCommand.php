@@ -13,7 +13,7 @@ class TransactionCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'transaction:get {date?}';
+    protected $signature = 'transaction:get {date?} {dateTo?}';
 
     /**
      * The console command description.
@@ -45,11 +45,20 @@ class TransactionCommand extends Command
     public function handle()
     {
         $commDate = $this->argument('date');
+        $commDateTo = $this->argument('dateTo');
         if ($commDate) {
             $commDate = Carbon::parse($commDate);
         }else{
             $commDate = now();
         }
-        return $this->commissionCalculationService->calculateCommissionFor($commDate);
+        if (!$commDateTo) {
+            return $this->commissionCalculationService->calculateCommissionFor($commDate);
+        }else{
+            foreach (range(1, $commDate->diffInDays(Carbon::parse($commDateTo)) + 1) as $d) {
+                $this->info('Generating for date '.$d);
+                $this->commissionCalculationService->calculateCommissionFor(Carbon::create($commDate->year, $commDate->month, $d));
+            }
+            return 0;
+        }
     }
 }

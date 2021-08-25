@@ -17,8 +17,16 @@
                 <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('console.users.index') }}">{{ __('Users') }}</a></li>
             </ul>
         </li>
+        <li class="c-sidebar-nav-item c-sidebar-nav-dropdown"><a
+                    class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+                <i class="c-sidebar-nav-icon fas fa-file-invoice"></i>
+                {{ __('Report') }}</a>
+            <ul class="c-sidebar-nav-dropdown-items">
+                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('console.commissions.index') }}">{{ __('General Commission') }}</a></li>
+            </ul>
+        </li>
 
-{{--        <li class="c-sidebar-nav-item c-sidebar-nav-dropdown"><a--}}
+        {{--        <li class="c-sidebar-nav-item c-sidebar-nav-dropdown"><a--}}
 {{--                    class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">--}}
 {{--                <i class="c-sidebar-nav-icon fas fa-user-plus"></i>--}}
 {{--                {{ __('AF Management') }}</a>--}}
@@ -27,14 +35,14 @@
 {{--            </ul>--}}
 {{--        </li>--}}
 
-        <li class="c-sidebar-nav-item c-sidebar-nav-dropdown"><a
-                    class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
-                <i class="c-sidebar-nav-icon fas fa-cogs"></i>
-                {{ __('Setting') }}</a>
-            <ul class="c-sidebar-nav-dropdown-items">
-                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('console.account-types.index') }}">{{ __('Account Types') }}</a></li>
-            </ul>
-        </li>
+{{--        <li class="c-sidebar-nav-item c-sidebar-nav-dropdown"><a--}}
+{{--                    class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">--}}
+{{--                <i class="c-sidebar-nav-icon fas fa-cogs"></i>--}}
+{{--                {{ __('Setting') }}</a>--}}
+{{--            <ul class="c-sidebar-nav-dropdown-items">--}}
+{{--                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('console.account-types.index') }}">{{ __('Account Types') }}</a></li>--}}
+{{--            </ul>--}}
+{{--        </li>--}}
     </ul>
     <button class="c-sidebar-minimizer c-class-toggler" type="button" data-target="_parent"
             data-class="c-sidebar-minimized"></button>
