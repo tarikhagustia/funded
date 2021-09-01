@@ -6,7 +6,7 @@
 {{--        </svg>--}}
     </div>
     <ul class="c-sidebar-nav">
-        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="index.html">
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ url('/') }}">
                 <i class="c-sidebar-nav-icon fas fa-home"></i>
                 Dashboard<span class="badge badge-info">NEW</span></a></li>
         <li class="c-sidebar-nav-item c-sidebar-nav-dropdown"><a

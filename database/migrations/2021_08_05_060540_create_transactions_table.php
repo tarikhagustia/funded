@@ -18,6 +18,8 @@ class CreateTransactionsTable extends Migration
             $table->date('transaction_date');
             $table->string('af_code', 100);
             $table->integer('login');
+            $table->string('ac_type')->nullable();
+            $table->double('max_rebate')->nullable();
             $table->string('meta_group');
             $table->string('client_name');
             $table->integer('rate');

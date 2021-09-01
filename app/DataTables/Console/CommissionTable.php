@@ -10,6 +10,8 @@ use Yajra\DataTables\Html\Builder;
 use App\Models\Console;
 use Yajra\DataTables\DataTableAbstract;
 use App\Models\Transaction;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class CommissionTable extends DataTable
 {
@@ -35,7 +37,15 @@ class CommissionTable extends DataTable
      */
     public function query(Transaction $model)
     {
-        return $model->newQuery();
+        $query = $model->newQuery();
+        $tmpDate = explode(' - ', request()->input('range'));
+        if (count($tmpDate) == 2) {
+            $dateStart = Carbon::parse($tmpDate[0])->startOfDay();
+            $dateEnd = Carbon::parse($tmpDate[1])->endOfDay();
+            $query->whereBetween('transaction_date', [$dateStart, $dateEnd]);
+        }
+
+        return $query;
     }
 
     /**
@@ -51,6 +61,11 @@ class CommissionTable extends DataTable
                     ->minifiedAjax()
                     ->orderBy(0, 'desc')
                     ->dom('Bfrtip')
+                    ->ajax([
+                        'data' => 'function(d) { 
+                                    d.range = $("#reportrange span").html();
+                                }'
+                    ])
                     ->buttons(
                         // Button::make('create'),
                         Button::make('export'),
@@ -71,6 +86,8 @@ class CommissionTable extends DataTable
             Column::make('login'),
             Column::make('client_name'),
             Column::make('rate'),
+            Column::make('ac_type'),
+            Column::make('max_rebate'),
             Column::make('af_name'),
             Column::make('lot'),
             Column::make('comm'),

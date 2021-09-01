@@ -23,6 +23,10 @@ Route::middleware('auth:af')->group(function(){
         Route::get('/af-member', [\App\Http\Controllers\Af\AfMemberController::class, 'index'])->name('af.af-member');
         Route::get('/treeview', [\App\Http\Controllers\Af\TreeviewController::class, 'index'])->name('af.treeview');
     });
+
+    Route::prefix('/commissions')->group(function(){
+        Route::get('/realtime-commissions', [\App\Http\Controllers\Af\RealtimeCommissionController::class, 'index'])->name('comm.realtime');
+    });
 });
 
 require __DIR__.'/admin.php';

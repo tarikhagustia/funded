@@ -5,7 +5,7 @@
         <div class="fade-in">
             <div class="card">
                 <div class="card-header">
-                    {{ __('Commission Table') }}
+                    {{ __('Realtime Commission Table') }}
                     <div class="card-header-actions">
                         <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
                             <i class="fa fa-calendar"></i>&nbsp;
@@ -13,6 +13,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="card-body table-responsive">
                     {{$dataTable->table()}}
                 </div>
@@ -22,11 +23,11 @@
 @endsection
 
 @push('javascript')
+
     {{ $dataTable->scripts() }}
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-
     <script type="text/javascript">
         $(function() {
 
@@ -56,4 +57,6 @@
 
         });
     </script>
+
+
 @endpush
