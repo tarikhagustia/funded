@@ -9,7 +9,7 @@ use Carbon\Carbon;
 
 class RealtimeCommissionController extends Controller
 {
-    public function index(RealtimeCommissionTable $table, AfCommissionService $afCommissionService)
+    public function index(RealtimeCommissionTable $table)
     {
         return $table->with([
 
