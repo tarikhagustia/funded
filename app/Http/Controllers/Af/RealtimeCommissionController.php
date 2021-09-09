@@ -11,8 +11,6 @@ class RealtimeCommissionController extends Controller
 {
     public function index(RealtimeCommissionTable $table, AfCommissionService $afCommissionService)
     {
-        $afCommissionService->getRealtimeCommissionQuery();
-
         return $table->with([
 
         ])->render('af.commissions.realtime');
