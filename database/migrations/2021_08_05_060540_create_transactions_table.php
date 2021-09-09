@@ -49,6 +49,8 @@ class CreateTransactionsTable extends Migration
             $table->double('lot_adjustment')->default(0);
             $table->date('registration_date');
             $table->timestamps();
+
+            $table->unique(['transaction_date', 'login']);
         });
     }
 
