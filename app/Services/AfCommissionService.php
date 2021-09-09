@@ -22,7 +22,7 @@ class AfCommissionService
             $query = $this->getCommissionQuery($af);
             $result = $query->leftJoin(DB::connection('mt4')
                                          ->getDatabaseName().'.MT4_TRADES as mt', function ($join) use ($carbon) {
-                $join->on('mt.LOGIN', '=', 'a.accountid')->whereDate('mt.CLOSE_TIME', '=', $carbon->format('Y-m-d'));
+                $join->on('mt.LOGIN', '=', 'a.accountid')->whereIn('CMD', [0,1])->whereDate('mt.CLOSE_TIME', '=', $carbon->format('Y-m-d'));
             })->groupBy('a.id');
 
             $newCollection = $result->get()->map(function ($row) use ($carbon, $af) {
