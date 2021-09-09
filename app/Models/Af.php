@@ -13,6 +13,7 @@ class Af extends Authenticatable
 
     protected $connection = "crm";
     protected $table = "agents";
+    public $timestamps = false;
 
     public function getParentIdName()
     {

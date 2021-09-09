@@ -50,7 +50,7 @@ class RealtimeCommissionTable extends DataTable
                 return $query->sum(DB::raw('VOLUME/100'));
             })
             ->addColumn('percent', function ($row) {
-                return $row->{'af_'.$this->user->level_on_group};
+                return $row->{'af'.$this->user->level_on_group};
             })
             ->addColumn('total_comm', 'af.commissions.total_comm')
             ->addIndexColumn();
@@ -105,7 +105,7 @@ class RealtimeCommissionTable extends DataTable
             Column::make('account_type')->name('g.account_type')->title('Account Type'),
             Column::make('nama')->name('c.nama')->title('Client Name'),
             Column::make('agentname')->name('ag.agentname')->title('Af Name'),
-            Column::make('af_'.$this->user->level_on_group)->searchable(false)->orderable(false)->title('Af Percentage (%)'),
+            Column::make('af'.$this->user->level_on_group)->searchable(false)->orderable(false)->title('Af Percentage (%)'),
             Column::make('max_rebate')->name('g.max_rebate')->title('Max Rebate (USD)'),
             Column::make('lot')->orderable(false)->searchable(false)->title('Lot'),
             Column::make('total_comm')->orderable(false)->searchable(false)->title('Total Commission'),

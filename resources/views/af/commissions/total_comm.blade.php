@@ -1,1 +1,1 @@
-{{ number_format($lot * $max_rebate * $percent / 100, 2) }}
+{{ number_format($lot * $max_rebate * $percent, 2) }}

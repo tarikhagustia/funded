@@ -5,6 +5,7 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Console\Commands\TransactionCommand;
+use App\Console\Commands\AfCommissionCommand;
 
 class Kernel extends ConsoleKernel
 {
@@ -14,7 +15,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        TransactionCommand::class
+        TransactionCommand::class,
+        AfCommissionCommand::class
     ];
 
     /**
@@ -25,7 +27,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        // Jam 10 Waktu UTC
+        $schedule->command('transaction:get')->dailyAt('22:00');
     }
 
     /**
