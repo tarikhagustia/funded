@@ -13,8 +13,9 @@ class CommissionCalculationService
     public function calculateCommissionFor(Carbon $date)
     {
         $queryAccounts = DB::connection('crm')->table('accounts', 'a')
-                           ->select(['a.accountid', 'agr.type_name as account_type', 'agr.max_rebate', 'c.nama', 'r.rate', 'ag.id as agent_id', 'ag.agentcode', 'ag.agentname', 'ac.commission as comm_charge', 'ac.ov as or', DB::raw('IFNULL(a.bop, 0) as bop')])
+                           ->select(['a.accountid', 'agr.type_name as account_type', 'cm.max_rebate', 'c.nama', 'r.rate', 'ag.id as agent_id', 'ag.agentcode', 'ag.agentname', 'ac.commission as comm_charge', 'ac.ov as or', DB::raw('IFNULL(a.bop, 0) as bop')])
                            ->join('account_groups as agr', 'agr.id', '=', 'a.account_group_id')
+                           ->join('commissions as cm', 'cm.id', '=', 'agr.commission_id')
                            ->join('fix_rates as r', 'r.id', '=', 'a.currencyid')
                            ->join('clients as c', 'c.id', '=', 'a.userid')
                            ->join('agents_code as ac', 'ac.id', '=', 'a.comm_id')
