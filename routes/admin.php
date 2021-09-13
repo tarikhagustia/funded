@@ -14,11 +14,11 @@ Route::prefix("/console")->name("console.")->group(function (){
          ->name("login-post");
 
     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
-         ->middleware('auth')
+         ->middleware('auth:admin')
          ->name('logout');
 
     // Authenticated Routes
-    Route::middleware("auth:admin")->group(function (){
+    Route::middleware(["auth:admin", "console"])->group(function (){
 
         Route::get("/", [\App\Http\Controllers\Console\DashboardController::class, 'index']);
 
