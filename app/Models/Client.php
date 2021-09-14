@@ -12,4 +12,9 @@ class Client extends Authenticatable
 
     protected $connection = "crm";
     protected $table = "clients";
+
+    public function accounts()
+    {
+        return $this->hasMany(Account::class,'userid');
+    }
 }

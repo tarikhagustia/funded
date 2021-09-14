@@ -22,6 +22,17 @@ Route::prefix("/console")->name("console.")->group(function (){
 
         Route::get("/", [\App\Http\Controllers\Console\DashboardController::class, 'index']);
 
+          Route::prefix('clients')->name("clients.")->group(function(){
+               Route::get('/',[\App\Http\Controllers\Console\ClientController::class, 'index'])->name('index');
+               Route::get('/show/{client}',[\App\Http\Controllers\Console\ClientController::class, 'show'])->name('view');
+          });
+
+          Route::prefix('trading_accounts')->name("trading_accounts.")->group(function(){
+               Route::get('/',[\App\Http\Controllers\Console\ClientController::class, 'index'])->name('index');
+          });
+
+        Route::get("/", [\App\Http\Controllers\Console\DashboardController::class, 'index']);
+
         // User Management
         Route::resource('users', \App\Http\Controllers\Console\UserController::class);
 
