@@ -27,6 +27,11 @@ Route::prefix("/console")->name("console.")->group(function (){
                Route::get('/show/{client}',[\App\Http\Controllers\Console\ClientController::class, 'show'])->name('view');
           });
 
+          // Route::prefix('affiliates')->name("affiliates.")->group(function(){
+          //      Route::get('/',[\App\Http\Controllers\Console\AffiliateController::class, 'index'])->name('index');
+          //      Route::get('/show/{affiliate}',[\App\Http\Controllers\Console\AffiliateController::class, 'show'])->name('view');
+          // });
+
           Route::prefix('trading_accounts')->name("trading_accounts.")->group(function(){
                Route::get('/',[\App\Http\Controllers\Console\TradingAccountController::class, 'index'])->name('index');
                Route::get('/show/{account}',[\App\Http\Controllers\Console\TradingAccountController::class, 'show'])->name('view');

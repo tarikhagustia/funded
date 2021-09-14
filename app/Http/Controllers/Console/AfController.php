@@ -4,22 +4,29 @@ namespace App\Http\Controllers\Console;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\DataTables\Console\UserDataTable;
+use App\DataTables\Console\AfDataTable;
 use App\Models\Admin;
+use App\Models\Af;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 
 class AfController extends Controller
 {
-    public function index(UserDataTable $dataTable)
+    public function index(AfDataTable $dataTable)
     {
-        return $dataTable->render('console.users.index');
+        return $dataTable->render('console.affiliates.index');
     }
 
     public function create()
     {
         $roles = Role::all();
         return view('console.users.create', compact('roles'));
+    }
+
+    function show(Af $affiliate){
+        return view('console.affiliates.show',[
+            'affiliate'=>$affiliate
+        ]);
     }
 
     public function store(Request $request)
