@@ -9,7 +9,7 @@
 
                   <div class="row">
                     <div class="col-sm-12 col-md-6">
-                      <h2>ACCOUNT</h2>
+                      <h2>Affiliate</h2>
                       <b>#{{$affiliate->id}}</b><br>
                     </div>
                     <div class="col-sm-12 col-md-6 text-right">
