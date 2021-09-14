@@ -25,6 +25,9 @@ class ClientDataTable extends DataTable
             ->editColumn('nama', function ($client) {
                 return '<a href="'.route('console.clients.view',$client->id).'">'.$client->nama.'</a>';
             })
+            ->editColumn('country',function($client){
+                return $client->get_country->countryname;
+            })
             ->rawColumns(['nama'])
             ->addIndexColumn();
     }

@@ -17,4 +17,11 @@ class Client extends Authenticatable
     {
         return $this->hasMany(Account::class,'userid');
     }
+
+    public function get_country()
+    {
+        return $this->hasOne(Country::class,'countrycode','country');
+    }
+
+    
 }

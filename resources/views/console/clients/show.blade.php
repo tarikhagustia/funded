@@ -18,7 +18,7 @@
                               <b>Name</b> : <a href="{{route('console.clients.view',$client->id)}}">{{$client->nama}}</a><br>
                               <b>Phone Number</b> : {{$client->contactno}}<br>
                               <b>Join Date</b> : {{$client->cdate}}<br>
-                              {{$client->country?$client->country:'-'}}<br>
+                              {{$client->country?$client->get_country->countryname:'-'}}<br>
                               <!-- <b>Ewallet Balance</b> : {{ number_format($client->saldo, 2) }}<br> -->
                           </div>
                         </div>
