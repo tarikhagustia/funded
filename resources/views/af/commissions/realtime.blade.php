@@ -5,7 +5,7 @@
         <div class="fade-in">
             <div class="card">
                 <div class="card-header">
-                    {{ __('Realtime Commission Table') }}
+                    {{ __('Commission Table') }}
                     <div class="card-header-actions">
                         <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
                             <i class="fa fa-calendar"></i>&nbsp;

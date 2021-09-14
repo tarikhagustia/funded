@@ -25,7 +25,7 @@
                 <i class="c-sidebar-nav-icon fas fa-file-invoice-dollar"></i>
                 {{ __('My Commission') }}</a>
             <ul class="c-sidebar-nav-dropdown-items">
-                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('comm.realtime') }}">{{ __('Realtime Commission') }}</a></li>
+                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('comm.realtime') }}">{{ __('Commission') }}</a></li>
             </ul>
         </li>
 

@@ -16,13 +16,15 @@ class AfCommissionService
     {
         // Get all Af Accounts from af 5 to 8
         $afs = DB::connection('crm')->table('agents')
-                                    ->where('level_on_group', '>=', 5)->get();
+                 ->where('level_on_group', '>=', 5)->get();
         $dataSet = collect([]);
         foreach ($afs as $af) {
             $query = $this->getCommissionQuery($af);
             $result = $query->leftJoin(DB::connection('mt4')
                                          ->getDatabaseName().'.MT4_TRADES as mt', function ($join) use ($carbon) {
-                $join->on('mt.LOGIN', '=', 'a.accountid')->whereIn('CMD', [0,1])->whereDate('mt.CLOSE_TIME', '=', $carbon->format('Y-m-d'));
+                $join->on('mt.LOGIN', '=', 'a.accountid')->whereIn('CMD', [0, 1])
+                     ->whereDate('mt.CLOSE_TIME', '=', $carbon->format('Y-m-d'))
+                     ->where(DB::raw('TIME_TO_SEC(TIMEDIFF(mt.CLOSE_TIME, mt.OPEN_TIME)) / 60'), '>=', DB::raw('g.time_limited_liquid'));
             })->groupBy('a.id');
 
             $newCollection = $result->get()->map(function ($row) use ($carbon, $af) {
@@ -44,13 +46,13 @@ class AfCommissionService
 
         }
 
-        try{
+        try {
             DB::beginTransaction();
             foreach ($dataSet as $d) {
                 AfCommission::insert($d->toArray());
             }
             DB::commit();
-        }catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             Log::error($exception);
             DB::rollBack();
         }
@@ -75,7 +77,7 @@ class AfCommissionService
                            ->join('agents_code as ac', 'ac.id', '=', 'a.comm_id')
                            ->join('agents as ag', 'ag.id', '=', 'ac.ref_id')
                            ->join('account_groups as g', 'g.id', '=', 'a.account_group_id')
-            ->join('commissions as cm', 'cm.id', '=', 'g.commission_id')
+                           ->join('commissions as cm', 'cm.id', '=', 'g.commission_id')
                            ->whereIn('ag.id', $child->pluck('id'));
 
         return $queryAccounts;

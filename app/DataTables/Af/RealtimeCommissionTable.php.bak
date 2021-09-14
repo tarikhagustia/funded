@@ -10,8 +10,6 @@ use Yajra\DataTables\DataTableAbstract;
 use App\Services\AfCommissionService;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
-use App\Models\AfCommission;
-use Illuminate\Support\Facades\Auth;
 
 class RealtimeCommissionTable extends DataTable
 {
@@ -37,7 +35,24 @@ class RealtimeCommissionTable extends DataTable
     public function dataTable($query)
     {
         return datatables()
-            ->eloquent($query)
+            ->query($query)
+            ->addColumn('lot', function ($row) {
+                $query = DB::connection('mt4')->table('MT4_TRADES')->where('LOGIN', $row->accountid)
+                           ->whereIn('CMD', [1, 0]);
+
+                $tmpDate = explode(' - ', request()->input('range'));
+                if (count($tmpDate) == 2) {
+                    $dateStart = Carbon::parse($tmpDate[0])->startOfDay();
+                    $dateEnd = Carbon::parse($tmpDate[1])->endOfDay();
+                    $query->whereBetween('CLOSE_TIME', [$dateStart, $dateEnd]);
+                }
+
+                return $query->sum(DB::raw('VOLUME/100'));
+            })
+            ->addColumn('percent', function ($row) {
+                return $row->{'af'.$this->user->level_on_group};
+            })
+            ->addColumn('total_comm', 'af.commissions.total_comm')
             ->addIndexColumn();
     }
 
@@ -49,16 +64,7 @@ class RealtimeCommissionTable extends DataTable
      */
     public function query()
     {
-        $query = AfCommission::where('af_id', Auth::id());
-
-        $tmpDate = explode(' - ', request()->input('range'));
-        if (count($tmpDate) == 2) {
-            $dateStart = Carbon::parse($tmpDate[0])->startOfDay();
-            $dateEnd = Carbon::parse($tmpDate[1])->endOfDay();
-            $query->whereBetween('comm_date', [$dateStart, $dateEnd]);
-        }
-
-        return $query;
+        return $this->afCommissionService->getRealtimeCommissionQuery();;
     }
 
     /**
@@ -94,15 +100,15 @@ class RealtimeCommissionTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('DT_RowIndex')->title(__('No'))->orderable(false)->searchable(false),
-            Column::make('comm_date')->title(__('Date')),
-            Column::make('login')->title('Login'),
-            Column::make('client_name')->title('Client Name'),
-            Column::make('af_name')->title('Af Name'),
-            Column::make('af_percentage')->title('Af Percentage (%)'),
-            Column::make('max_rebate')->title('Max Rebate (USD)'),
+            // Column::make('DT_RowIndex')->title(__('No'))->orderable(false)->searchable(false),
+            Column::make('accountid')->name('a.accountid')->title('Login'),
+            Column::make('account_type')->name('g.account_type')->title('Account Type'),
+            Column::make('nama')->name('c.nama')->title('Client Name'),
+            Column::make('agentname')->name('ag.agentname')->title('Af Name'),
+            Column::make('af'.$this->user->level_on_group)->searchable(false)->orderable(false)->title('Af Percentage (%)'),
+            Column::make('max_rebate')->name('g.max_rebate')->title('Max Rebate (USD)'),
             Column::make('lot')->orderable(false)->searchable(false)->title('Lot'),
-            Column::make('total_commission')->orderable(false)->searchable(false)->title('Total Commission'),
+            Column::make('total_comm')->orderable(false)->searchable(false)->title('Total Commission'),
 
             // Column::computed('action')
             //       ->exportable(false)

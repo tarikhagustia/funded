@@ -12,6 +12,7 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="assets/favicon/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
+    @livewireStyles
     <link href="{{ mix('css/style.css') }}" rel="stylesheet">
     @stack('stylesheet')
 </head>
@@ -105,6 +106,7 @@
 
 <script src="{{ mix('js/app.js') }}"></script>
 <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
+@livewireScripts
 @stack('javascript')
 <script type="text/javascript">
     $(function () {
