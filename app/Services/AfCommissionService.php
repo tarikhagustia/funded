@@ -24,7 +24,7 @@ class AfCommissionService
                                          ->getDatabaseName().'.MT4_TRADES as mt', function ($join) use ($carbon) {
                 $join->on('mt.LOGIN', '=', 'a.accountid')->whereIn('CMD', [0, 1])
                      ->whereDate('mt.CLOSE_TIME', '=', $carbon->format('Y-m-d'))
-                     ->where(DB::raw('TIME_TO_SEC(TIMEDIFF(mt.CLOSE_TIME, mt.OPEN_TIME)) / 60'), '>=', 'g.time_limited_liquid');
+                     ->where(DB::raw('TIME_TO_SEC(TIMEDIFF(mt.CLOSE_TIME, mt.OPEN_TIME)) / 60'), '>=', DB::raw('g.time_limited_liquid'));
             })->groupBy('a.id');
 
             $newCollection = $result->get()->map(function ($row) use ($carbon, $af) {
