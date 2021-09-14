@@ -21,4 +21,14 @@ class Account extends Model
     {
         return $this->hasOne(FixRate::class,'id','currencyid');
     }
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class,'userid');
+    }
+
+    public function trades()
+    {
+        return $this->hasMany(MetaTrade::class, "LOGIN", "accountid");
+    }
 }
