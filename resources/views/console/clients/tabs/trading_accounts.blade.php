@@ -13,7 +13,7 @@
     @foreach($client->accounts as $key => $account)
     <tr>
         <td>{{++$key}}</td>
-        <td><a href="">{{$account->accountid}}</a></td>
+        <td><a href="{{route('console.trading_accounts.view',$account->id)}}">{{$account->accountid}}</a></td>
         <td>{{$account->group->type_name}}</td>
         <td>{{$account->currency->symbol . $account->currency->rate}}</td>
         <td>{{$account->accdate}}</td>
