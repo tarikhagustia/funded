@@ -45,7 +45,7 @@ class TradingAccountDataTable extends DataTable
      */
     public function query(Account $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()->where('account_group_id', '!=', null);
     }
 
     /**
@@ -76,7 +76,7 @@ class TradingAccountDataTable extends DataTable
      */
     protected function getColumns()
     {
-        return [    
+        return [
             Column::make('DT_RowIndex')->title(__('No'))->orderable(false)->searchable(false),
             Column::make('accountid')->title('Account'),
             Column::make('name')->title('Name'),
