@@ -55,9 +55,10 @@ class TransactionCommand extends Command
             return $this->commissionCalculationService->calculateCommissionFor($commDate);
         }else{
             foreach (range(1, $commDate->diffInDays(Carbon::parse($commDateTo)) + 1) as $d) {
-                $commDate->addDays();
+
                 $this->info('Generating for date '.$commDate->format('Y-m-d'));
                 $this->commissionCalculationService->calculateCommissionFor($commDate);
+                $commDate->addDays();
             }
             return 0;
         }

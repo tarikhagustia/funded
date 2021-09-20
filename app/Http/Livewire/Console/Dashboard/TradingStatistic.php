@@ -81,7 +81,9 @@ class TradingStatistic extends Component
                    ->whereIn('mt.CMD', [1, 0])
                    ->whereDate('mt.OPEN_TIME', '>=', $this->dateStart)
                    ->whereDate('mt.OPEN_TIME', '<=', $this->dateEnd)
-                   ->orderBy('mt.CLOSE_TIME', 'desc');
+            ->limit(10);
+        // ->orderByDesc('mt.TICKET');
+                   // ->orderBy('mt.TICKET', 'desc');
 
         $this->orders = $query->get();
     }
@@ -98,7 +100,8 @@ class TradingStatistic extends Component
                    ->whereDate('mt.OPEN_TIME', '>=', $this->dateStart)
                    ->whereDate('mt.OPEN_TIME', '<=', $this->dateEnd)
                    ->groupBy('u.LOGIN')
-                   ->orderBy('mt.OPEN_TIME', 'desc');
+                   ->orderBy(DB::raw('COUNT(mt.TICKET)'), 'desc')
+        ->take(10);
 
         $this->mostOrders = $query->get();
 
