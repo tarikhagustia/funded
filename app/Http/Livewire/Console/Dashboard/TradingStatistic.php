@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Console\Dashboard;
 
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cache;
 
 class TradingStatistic extends Component
 {
@@ -34,9 +35,9 @@ class TradingStatistic extends Component
 
     public function initialLoading()
     {
-        // $this->fetchSymbol();
+        $this->fetchSymbol();
 
-        // $this->fetchOrders();
+        $this->fetchOrders();
         //
         $this->fetchMostOrders();
     }
@@ -60,7 +61,7 @@ class TradingStatistic extends Component
                    ->whereDate('mt.OPEN_TIME', '>=', $this->dateStart)
                    ->whereDate('mt.OPEN_TIME', '<=', $this->dateEnd)
                    ->groupBy('s.SYMBOL')
-                   ->orderByRaw('COUNT(mt.TICKET) DESC')->take(10);
+                   ->orderByRaw('COUNT(mt.TICKET) DESC')->take(5);
         // dd($query->toSql());
         $this->records = $query->get();
 
@@ -82,7 +83,7 @@ class TradingStatistic extends Component
                    ->whereIn('mt.CMD', [1, 0])
                    ->whereDate('mt.OPEN_TIME', '>=', $this->dateStart)
                    ->whereDate('mt.OPEN_TIME', '<=', $this->dateEnd)
-                   ->limit(10)
+                   ->limit(5)
                    ->orderByDesc('mt.TICKET');
         // ->orderBy('mt.TICKET', 'desc');
         $this->orders = $query->get();
@@ -101,7 +102,7 @@ class TradingStatistic extends Component
                    ->whereDate('mt.OPEN_TIME', '<=', $this->dateEnd)
                    ->groupBy('u.LOGIN')
                    ->orderBy(DB::raw('COUNT(mt.TICKET)'), 'desc')
-                   ->take(10);
+                   ->take(5);
 
         $this->mostOrders = $query->get();
 
