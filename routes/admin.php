@@ -50,6 +50,8 @@ Route::prefix("/console")->name("console.")->group(function (){
 
         // Commission Route
         Route::resource('reports/commissions', \App\Http\Controllers\Console\Report\CommissionController::class);
+
+        Route::resource('reports/closed-order-by-lq', \App\Http\Controllers\Console\Report\ClosedOrderController::class)->only('index');
     });
 
 });
