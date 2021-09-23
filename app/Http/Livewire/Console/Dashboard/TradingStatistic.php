@@ -35,7 +35,7 @@ class TradingStatistic extends Component
 
     public function initialLoading()
     {
-        // $this->fetchSymbol();
+        $this->fetchSymbol();
 
         $this->fetchOrders();
         //
