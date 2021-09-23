@@ -19,8 +19,9 @@ class CommissionCalculationService
                            ->join('fix_rates as r', 'r.id', '=', 'a.currencyid')
                            ->join('clients as c', 'c.id', '=', 'a.userid')
                            ->join('agents_code as ac', 'ac.id', '=', 'a.comm_id')
-                           ->join('agents as ag', 'ag.id', '=', 'ac.ref_id')->get()
-        ;
+                           ->join('agents as ag', 'ag.id', '=', 'ac.ref_id')->get();
+
+
 
         // Get MetaTrader Information
         $queryLot = DB::connection('mt4')->table('MT4_TRADES', 't')
@@ -30,10 +31,13 @@ class CommissionCalculationService
                       ->whereBetween('t.CLOSE_TIME', [$date->format('Y-m-d').' 00:00:00', $date->format('Y-m-d').' 23:59:59'])
                       ->groupBy('t.LOGIN')->get()->keyBy('LOGIN');
 
+
+
         // Get daily transaction
         $queryDaily = DB::connection('mt4')->table('MT4_DAILY', 'd')
                         ->whereDate('TIME', $date->format('Y-m-d'))
                         ->whereIn('d.LOGIN', $queryAccounts->pluck('accountid'))->get()->keyBy('LOGIN');
+
 
 
 
