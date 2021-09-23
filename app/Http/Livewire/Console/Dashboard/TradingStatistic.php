@@ -34,10 +34,10 @@ class TradingStatistic extends Component
 
     public function initialLoading()
     {
-        $this->fetchSymbol();
+        // $this->fetchSymbol();
 
-        $this->fetchOrders();
-
+        // $this->fetchOrders();
+        //
         $this->fetchMostOrders();
     }
 
@@ -59,8 +59,9 @@ class TradingStatistic extends Component
                    ->whereYear('mt.CLOSE_TIME', 1970)
                    ->whereDate('mt.OPEN_TIME', '>=', $this->dateStart)
                    ->whereDate('mt.OPEN_TIME', '<=', $this->dateEnd)
-                   ->groupBy('s.SYMBOL');
-
+                   ->groupBy('s.SYMBOL')
+                   ->orderByRaw('COUNT(mt.TICKET) DESC')->take(10);
+        // dd($query->toSql());
         $this->records = $query->get();
 
         // dump($this->records);
@@ -73,18 +74,17 @@ class TradingStatistic extends Component
                    ->select([
                        'TICKET', 'mt.LOGIN', 'mt.SYMBOL', 'mt.OPEN_TIME', 'mt.CLOSE_TIME', 'mt.VOLUME', DB::raw('(TIME_TO_SEC(TIMEDIFF(mt.CLOSE_TIME, mt.OPEN_TIME)) / 60) as LQ_TIME')
                    ])
-                   ->join(DB::connection('crm')->getDatabaseName().".accounts as a", 'a.accountid', '=', 'mt.LOGIN')
-                   ->join(DB::connection('crm')
-                            ->getDatabaseName().".account_groups as g", 'g.id', '=', 'a.account_group_id')
+            // ->join(DB::connection('crm')->getDatabaseName().".accounts as a", 'a.accountid', '=', 'mt.LOGIN')
+            // ->join(DB::connection('crm')
+            //          ->getDatabaseName().".account_groups as g", 'g.id', '=', 'a.account_group_id')
                    ->whereYear('mt.CLOSE_TIME', '!=', 1970)
-                   ->where(DB::raw('(TIME_TO_SEC(TIMEDIFF(mt.CLOSE_TIME, mt.OPEN_TIME)) / 60)'), '<', DB::raw('g.time_limited_liquid'))
+                   ->where(DB::raw('(TIME_TO_SEC(TIMEDIFF(mt.CLOSE_TIME, mt.OPEN_TIME)) / 60)'), '<', 3)
                    ->whereIn('mt.CMD', [1, 0])
                    ->whereDate('mt.OPEN_TIME', '>=', $this->dateStart)
                    ->whereDate('mt.OPEN_TIME', '<=', $this->dateEnd)
-            ->limit(10);
-        // ->orderByDesc('mt.TICKET');
-                   // ->orderBy('mt.TICKET', 'desc');
-
+                   ->limit(10)
+                   ->orderByDesc('mt.TICKET');
+        // ->orderBy('mt.TICKET', 'desc');
         $this->orders = $query->get();
     }
 
@@ -101,7 +101,7 @@ class TradingStatistic extends Component
                    ->whereDate('mt.OPEN_TIME', '<=', $this->dateEnd)
                    ->groupBy('u.LOGIN')
                    ->orderBy(DB::raw('COUNT(mt.TICKET)'), 'desc')
-        ->take(10);
+                   ->take(10);
 
         $this->mostOrders = $query->get();
 
