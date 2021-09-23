@@ -39,7 +39,7 @@ class TradingStatistic extends Component
 
         $this->fetchOrders();
         //
-        // $this->fetchMostOrders();
+        $this->fetchMostOrders();
     }
 
     public function fetchSymbol()
