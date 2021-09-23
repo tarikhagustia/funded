@@ -91,20 +91,34 @@ class TradingStatistic extends Component
 
     public function fetchMostOrders()
     {
-        $query = DB::connection('mt4')
-                   ->table('MT4_TRADES', 'mt')
-                   ->select([
-                       'mt.LOGIN', 'u.NAME', DB::raw('COUNT(mt.TICKET) as TOTAL')
-                   ])
-                   ->join('MT4_USERS as u', 'u.LOGIN', '=', 'mt.LOGIN')
-                   ->whereIn('mt.CMD', [1, 0])
-                   ->whereDate('mt.OPEN_TIME', '>=', $this->dateStart)
-                   ->whereDate('mt.OPEN_TIME', '<=', $this->dateEnd)
-                   ->groupBy('u.LOGIN')
-                   ->orderBy(DB::raw('COUNT(mt.TICKET)'), 'desc')
-                   ->take(5);
+        // $query = DB::connection('mt4')
+        //            ->table('MT4_TRADES', 'mt')
+        //            ->select([
+        //                'mt.LOGIN', 'u.NAME', DB::raw('COUNT(mt.TICKET) as TOTAL')
+        //            ])
+        //            ->join('MT4_USERS as u', 'u.LOGIN', '=', 'mt.LOGIN')
+        //            ->whereIn('mt.CMD', [1, 0])
+        //            ->whereDate('mt.OPEN_TIME', '>=', $this->dateStart)
+        //            ->whereDate('mt.OPEN_TIME', '<=', $this->dateEnd)
+        //            ->groupBy('u.LOGIN')
+        //            ->orderBy(DB::raw('COUNT(mt.TICKET)'), 'desc')
+        //            ->take(5);
+        $query = DB::connection('mt4')->select("SELECT * FROM (select
+	`mt`.`LOGIN`,
+	`u`.`NAME`,
+	COUNT(mt.TICKET) as TOTAL
+from
+	`MT4_TRADES` as `mt`
+inner join `MT4_USERS` as `u` on
+	`u`.`LOGIN` = `mt`.`LOGIN`
+where
+	`mt`.`CMD` in (1, 0)
+	and date(`mt`.`OPEN_TIME`) >= '{$this->dateStart}'
+	and date(`mt`.`OPEN_TIME`) <= '{$this->dateEnd}'
+group by
+	`u`.`LOGIN`) as t order by t.TOTAL DESC limit 5");
 
-        $this->mostOrders = $query->get();
+        $this->mostOrders = $query;
 
     }
 
