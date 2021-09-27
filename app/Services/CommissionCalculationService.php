@@ -22,7 +22,6 @@ class CommissionCalculationService
                            ->join('agents as ag', 'ag.id', '=', 'ac.ref_id')->get();
 
 
-
         // Get MetaTrader Information
         $queryLot = DB::connection('mt4')->table('MT4_TRADES', 't')
                       ->select(['u.REGDATE', 'u.LOGIN', 'u.GROUP', 'u.NAME', 'u.CREDIT', 'u.EQUITY', 'u.BALANCE', DB::raw('SUM(t.VOLUME / 100) as LOT')])
@@ -32,20 +31,23 @@ class CommissionCalculationService
                       ->groupBy('t.LOGIN')->get()->keyBy('LOGIN');
 
 
-
         // Get daily transaction
         $queryDaily = DB::connection('mt4')->table('MT4_DAILY', 'd')
                         ->whereDate('TIME', $date->format('Y-m-d'))
                         ->whereIn('d.LOGIN', $queryAccounts->pluck('accountid'))->get()->keyBy('LOGIN');
 
+        $prev = clone $date;
+        $prev->subDay();
+        $queryDailyPrev = DB::connection('mt4')->table('MT4_DAILY', 'd')
+                            ->whereDate('TIME', $prev->format('Y-m-d'))
+                            ->whereIn('d.LOGIN', $queryAccounts->pluck('accountid'))->get()->keyBy('LOGIN');
 
 
-
-
-        $results = $queryAccounts->map(function ($row) use ($queryLot, $queryDaily, $date) {
+        $results = $queryAccounts->map(function ($row) use ($queryLot, $queryDaily, $date, $queryDailyPrev) {
             $tradeData = isset($queryLot[(int)$row->accountid]) ? $queryLot[(int)$row->accountid] : null;
             $dailyData = isset($queryDaily[(int)$row->accountid]) ? $queryDaily[(int)$row->accountid] : null;
-            if (!$tradeData || !$dailyData) return [];
+            $prevData = isset($queryDailyPrev[(int)$row->accountid]) ? $queryDailyPrev[(int)$row->accountid] : null;
+            if (!$tradeData || !$dailyData || !$prevData) return [];
             $q = new \stdClass();
             $q->transaction_date = $date->format('Y-m-d');
             $q->af_code = $row->agent_id;
@@ -64,10 +66,10 @@ class CommissionCalculationService
             $q->bop_idr = $q->lot * $q->bop * $q->rate;
             $q->comm_idr = $q->lot * $q->comm * $q->rate;
             $q->total_rebate = $q->comm_idr + $q->or_idr + $q->bop_idr;
-            $q->prev_equity = floatval($dailyData->EQUITY);
+            $q->prev_equity = floatval($prevData->EQUITY);
             $q->net_margin_in_out = $dailyData->MARGIN + $dailyData->DEPOSIT;
             $q->current_equity = floatval($dailyData->EQUITY);
-            $q->credit = floatval($q->current_equity);
+            $q->credit = floatval($dailyData->CREDIT);
             $q->net_equity = $q->current_equity - $q->credit;
             $q->agent_percentage = 0.05; // TODO : harus dinamis
             $q->profit_loss = $q->prev_equity + $q->net_margin_in_out - $q->net_equity;
@@ -81,7 +83,7 @@ class CommissionCalculationService
             $q->ac_type = $row->account_type;
             $q->max_rebate = $row->max_rebate;
             return (array)$q;
-        })->filter(function($row){
+        })->filter(function ($row) {
             return count($row) == 0 ? false : true;
         });
 

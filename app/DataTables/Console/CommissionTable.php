@@ -61,6 +61,7 @@ class CommissionTable extends DataTable
                     ->minifiedAjax()
                     ->orderBy(0, 'desc')
                     ->dom('Bfrtip')
+            ->stateSave(true)
                     ->ajax([
                         'data' => 'function(d) { 
                                     d.range = $("#reportrange span").html();
@@ -68,6 +69,7 @@ class CommissionTable extends DataTable
                     ])
                     ->buttons(
                         // Button::make('create'),
+                        Button::make('colvis'),
                         Button::make('export'),
                         Button::make('print')
                     );

@@ -25,7 +25,7 @@ class ClosedOrderTable extends DataTable
         return datatables()
             ->query($query)
             ->addColumn('TYPE', function ($row) {
-                return $row->CMD == 1 ? "Buy" : "Sell";
+                return $row->CMD == 0 ? "Buy" : "Sell";
             })
             ->addIndexColumn();
     }
@@ -41,7 +41,7 @@ class ClosedOrderTable extends DataTable
         $query = DB::connection('mt4')
                    ->table('MT4_TRADES', 'mt')
                    ->select([
-                       'TICKET', 'mt.CMD', 'mt.LOGIN', 'mt.SYMBOL', 'mt.OPEN_TIME', 'mt.CLOSE_TIME', 'mt.VOLUME', DB::raw('(TIME_TO_SEC(TIMEDIFF(mt.CLOSE_TIME, mt.OPEN_TIME)) / 60) as LQ_TIME')
+                       'TICKET', 'mt.CMD', 'mt.LOGIN', 'mt.SYMBOL', 'mt.OPEN_TIME', 'mt.CLOSE_TIME', 'mt.VOLUME', DB::raw('ROUND(VOLUME/100, 2) as LOT'), DB::raw('(TIME_TO_SEC(TIMEDIFF(mt.CLOSE_TIME, mt.OPEN_TIME)) / 60) as LQ_TIME')
                    ])
                    ->whereYear('mt.CLOSE_TIME', '!=', 1970)
                    ->where(DB::raw('(TIME_TO_SEC(TIMEDIFF(mt.CLOSE_TIME, mt.OPEN_TIME)) / 60)'), '<', 3)
@@ -69,6 +69,7 @@ class ClosedOrderTable extends DataTable
                     ->minifiedAjax()
                     ->orderBy(0, 'desc')
                     ->dom('Bfrtip')
+                    ->stateSave(true)
                     ->ajax([
                         'data' => 'function(d) { 
                                     d.range = $("#reportrange span").html();
@@ -78,10 +79,11 @@ class ClosedOrderTable extends DataTable
             //     'lengthMenu' => [10, 25, 50, 75, 100, "All"],
             // ])
                     ->buttons(
-                        Button::make('pageLength'),
-                        Button::make('export'),
-                        Button::make('print')
-                    );
+                Button::make('colvis'),
+                Button::make('pageLength'),
+                Button::make('export'),
+                Button::make('print')
+            );
     }
 
     /**
@@ -96,7 +98,7 @@ class ClosedOrderTable extends DataTable
             Column::make('TICKET')->name('mt.TICKET'),
             Column::make('LOGIN')->name('mt.LOGIN'),
             Column::make('SYMBOL')->name('mt.SYMBOL'),
-            Column::make('VOLUME')->name('mt.VOLUME'),
+            Column::make('LOT')->name('mt.LOT')->searchable(false)->orderable(false),
             Column::make('TYPE')->searchable(false)->orderable(false),
             Column::make('OPEN_TIME')->name('mt.OPEN_TIME'),
             Column::make('CLOSE_TIME')->name('mt.CLOSE_TIME'),

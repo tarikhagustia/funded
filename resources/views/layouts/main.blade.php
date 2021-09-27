@@ -106,6 +106,7 @@
 
 <script src="{{ mix('js/app.js') }}"></script>
 <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
+<script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.colVis.min.js"></script>
 @livewireScripts
 @stack('javascript')
 <script type="text/javascript">

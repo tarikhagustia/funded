@@ -50,7 +50,7 @@ class CreateTransactionsTable extends Migration
             $table->date('registration_date');
             $table->timestamps();
 
-            $table->unique(['transaction_date', 'login']);
+            // $table->unique(['transaction_date', 'login']);
         });
     }
 
