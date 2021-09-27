@@ -52,6 +52,7 @@ class TransactionCommand extends Command
             $commDate = now();
         }
         if (!$commDateTo) {
+            dump($commDate);
             return $this->commissionCalculationService->calculateCommissionFor($commDate);
         }else{
             foreach (range(1, $commDate->diffInDays(Carbon::parse($commDateTo)) + 1) as $d) {
