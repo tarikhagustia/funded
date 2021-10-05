@@ -51,6 +51,9 @@ Route::prefix("/console")->name("console.")->group(function (){
         // Commission Route
         Route::resource('reports/commissions', \App\Http\Controllers\Console\Report\CommissionController::class);
 
+        // Withdrawal Route
+        Route::resource('reports/withdrawals', \App\Http\Controllers\Console\Report\WithdrawalController::class)->only('index');
+
         Route::resource('reports/closed-order-by-lq', \App\Http\Controllers\Console\Report\ClosedOrderController::class)->only('index');
 
         Route::prefix('reports/statistics')->name('reports.statistics.')->group(function(){
