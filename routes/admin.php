@@ -52,6 +52,11 @@ Route::prefix("/console")->name("console.")->group(function (){
         Route::resource('reports/commissions', \App\Http\Controllers\Console\Report\CommissionController::class);
 
         Route::resource('reports/closed-order-by-lq', \App\Http\Controllers\Console\Report\ClosedOrderController::class)->only('index');
+
+        Route::prefix('reports/statistics')->name('reports.statistics.')->group(function(){
+            Route::get('/', [\App\Http\Controllers\Console\Report\Statistic\StatisticController::class, 'index'])->name('index');
+            Route::get('/symbols', [\App\Http\Controllers\Console\Report\Statistic\StatisticController::class, 'symbol'])->name('symbol');
+        });
     });
 
 });

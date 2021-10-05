@@ -41,8 +41,11 @@
             <ul class="c-sidebar-nav-dropdown-items">
                 <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('console.commissions.index') }}">{{ __('General Commission') }}</a></li>
             </ul>
+{{--            <ul class="c-sidebar-nav-dropdown-items">--}}
+{{--                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('console.closed-order-by-lq.index') }}">{{ __('Closed Order By LQ Time') }}</a></li>--}}
+{{--            </ul>--}}
             <ul class="c-sidebar-nav-dropdown-items">
-                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('console.closed-order-by-lq.index') }}">{{ __('Closed Order By LQ Time') }}</a></li>
+                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('console.reports.statistics.index') }}">{{ __('Statistic') }}</a></li>
             </ul>
         </li>
 
