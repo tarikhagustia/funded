@@ -14,7 +14,7 @@
 
                         <select name="type" id="select-type" class="form-control">
                             <option value="Withdrawal" selected>Withdrawal</option>
-                            <option value="Deposit">Deposit</option>
+                            <option value="New Account">New Account</option>
                         </select>
                     </div>
                 </div>
