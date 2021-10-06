@@ -11,15 +11,20 @@
                             <i class="fa fa-calendar"></i>&nbsp;
                             <span></span> <i class="fa fa-caret-down"></i>
                         </div>
-
-                        <select name="type" id="select-type" class="form-control">
-                            <option value="Withdrawal" selected>Withdrawal</option>
-                            <option value="New Account">New Account</option>
-                        </select>
                     </div>
                 </div>
                 <div class="card-body table-responsive">
                     {{$dataTable->table()}}
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-3 ml-auto">
+                            <select name="type" id="select-type" class="form-control">
+                                <option value="Withdrawal" selected>Withdrawal</option>
+                                <option value="New Account">New Account</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

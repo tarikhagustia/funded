@@ -25,4 +25,11 @@ class TransactionCrm extends Model
     {
         return $this->belongsTo(Status::class, 'status');
     }
+
+    public function account()
+    {
+        return $this->belongsTo(Account::class, 'accid');
+    }
+
+
 }

@@ -26,6 +26,12 @@ class WithdrawalTable extends DataTable
             ->editColumn('userid',function($transaction){
                 return $transaction->user->nama;
             })
+            ->editColumn('accid',function($transaction){
+                return $transaction->account->group->type_name;
+            })
+            ->editColumn('ipaddress',function($transaction){
+                return $transaction->ipaddress ? $transaction->ipaddress : '-';
+            })
             ->addIndexColumn();
     }
 
@@ -96,6 +102,9 @@ class WithdrawalTable extends DataTable
         return [
             Column::make('DT_RowIndex')->title(__('No'))->orderable(false)->searchable(false),
             Column::make('userid')->title('Client'),
+            Column::make('accid')->title('Account'),
+            Column::make('amount')->title('Amount'),
+            Column::make('ipaddress')->title('IP Address'),
             Column::make('status_name')->title('Status'),
             Column::make('tdate')->title('Transaction Date'),
         ];
