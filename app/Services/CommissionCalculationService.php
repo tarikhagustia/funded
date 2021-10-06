@@ -37,7 +37,7 @@ class CommissionCalculationService
                         ->whereIn('d.LOGIN', $queryAccounts->pluck('accountid'))->get()->keyBy('LOGIN');
 
         $prev = clone $date;
-        if ($prev->dayOfWeek == Carbon::WEDNESDAY) {
+        if ($prev->dayOfWeek == Carbon::MONDAY) {
             $prev->subDays(3);
         }else{
             $prev->subDay();
