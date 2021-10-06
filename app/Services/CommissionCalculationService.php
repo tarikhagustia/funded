@@ -37,7 +37,12 @@ class CommissionCalculationService
                         ->whereIn('d.LOGIN', $queryAccounts->pluck('accountid'))->get()->keyBy('LOGIN');
 
         $prev = clone $date;
-        $prev->subDay();
+        if ($prev->dayOfWeek == Carbon::WEDNESDAY) {
+            $prev->subDays(3);
+        }else{
+            $prev->subDay();
+        }
+
         $queryDailyPrev = DB::connection('mt4')->table('MT4_DAILY', 'd')
                             ->whereDate('TIME', $prev->format('Y-m-d'))
                             ->whereIn('d.LOGIN', $queryAccounts->pluck('accountid'))->get()->keyBy('LOGIN');
