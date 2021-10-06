@@ -5,7 +5,7 @@
         <div class="fade-in">
             <div class="card">
                 <div class="card-header">
-                    {{ __('Last Withdrawal and Deposit') }}
+                    {{ __('Last Member Transaction') }}
                     <div class="card-header-actions">
                         <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%" >
                             <i class="fa fa-calendar"></i>&nbsp;
@@ -14,17 +14,20 @@
                     </div>
                 </div>
                 <div class="card-body table-responsive">
-                    {{$dataTable->table()}}
-                </div>
-                <div class="card-footer">
-                    <div class="row">
-                        <div class="col-3 ml-auto">
+                    <div class="row mb-3">
+                        <div class="col-3">
                             <select name="type" id="select-type" class="form-control">
-                                <option value="Withdrawal" selected>Withdrawal</option>
-                                <option value="New Account">New Account</option>
+                                <option value="" selected disabled>- Select Type -</option>
+                                @foreach($transaction_types as $type)
+                                    <option value="{{$type->name}}">{{$type->name}}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
+                    {{$dataTable->table()}}
+                </div>
+                <div class="card-footer">
+                    
                 </div>
             </div>
         </div>

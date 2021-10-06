@@ -15,6 +15,9 @@ class WithdrawalController extends Controller
 {
     public function index(WithdrawalTable $dataTable)
     {
-        return $dataTable->render('console.report.withdrawal.index');
+
+        $transaction_types = TransactionType::get();
+
+        return $dataTable->render('console.report.withdrawal.index',compact("transaction_types"));
     }
 }
