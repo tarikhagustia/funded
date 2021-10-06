@@ -72,7 +72,7 @@ class CommissionCalculationService
             $q->comm_idr = $q->lot * $q->comm * $q->rate;
             $q->total_rebate = $q->comm_idr + $q->or_idr + $q->bop_idr;
             $q->prev_equity = floatval($prevData->EQUITY);
-            $q->net_margin_in_out = $dailyData->MARGIN + $dailyData->DEPOSIT;
+            $q->net_margin_in_out = $dailyData->DEPOSIT;
             $q->current_equity = floatval($dailyData->EQUITY);
             $q->credit = floatval($dailyData->CREDIT);
             $q->net_equity = $q->current_equity - $q->credit;
