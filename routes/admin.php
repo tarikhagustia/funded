@@ -61,6 +61,8 @@ Route::prefix("/console")->name("console.")->group(function (){
             Route::get('/symbols', [\App\Http\Controllers\Console\Report\Statistic\StatisticController::class, 'symbol'])->name('symbol');
             Route::get('/top-commission', [\App\Http\Controllers\Console\Report\Statistic\StatisticController::class, 'topCommission'])->name('top-commission');
             Route::get('/top-new-member', [\App\Http\Controllers\Console\Report\Statistic\StatisticController::class, 'topNewMember'])->name('top-new-member');
+            Route::get('/top-gainer', [\App\Http\Controllers\Console\Report\Statistic\StatisticController::class, 'topGainer'])->name('top-gainer');
+            Route::get('/top-looser', [\App\Http\Controllers\Console\Report\Statistic\StatisticController::class, 'topLooser'])->name('top-looser');
         });
     });
 

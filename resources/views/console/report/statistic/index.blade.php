@@ -10,10 +10,9 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-4 mb-4">
-                            <span class="badge badge-danger small">Coming Soon</span>
                             <h3>{{ __('Top Looser') }}</h3>
                             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                            <a class="btn btn-outline-info">{{ __('See Report') }}</a>
+                            <a href="{{ route('console.reports.statistics.top-looser') }}" class="btn btn-outline-info">{{ __('See Report') }}</a>
                         </div>
 
                         <div class="col-sm-4 mb-4">
@@ -29,10 +28,9 @@
                         </div>
 
                         <div class="col-sm-4 mb-4">
-                            <span class="badge badge-danger small">Coming Soon</span>
                             <h3>{{ __('Top Gainer') }}</h3>
                             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                            <a class="btn btn-outline-info">{{ __('See Report') }}</a>
+                            <a href="{{ route('console.reports.statistics.top-gainer') }}" class="btn btn-outline-info">{{ __('See Report') }}</a>
                         </div>
 
                         <div class="col-sm-4 mb-4">

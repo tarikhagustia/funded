@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Hash;
 use App\DataTables\Console\UserDataTable;
 use App\DataTables\Console\CommissionTable;
 use App\DataTables\Console\Report\SymbolTable;
+use App\DataTables\Console\Report\TopGainerTable;
+use App\DataTables\Console\Report\TopLooserTable;
 use App\DataTables\Console\Report\TopNewMemberTable;
 use App\DataTables\Console\Report\TopCommissionTable;
 
@@ -35,6 +37,18 @@ class StatisticController extends Controller
     {
 
         return $dataTable->render('console.report.statistic.top-new-member');
+    }
+    
+    public function topGainer(TopGainerTable $dataTable)
+    {
+
+        return $dataTable->render('console.report.statistic.top-gainer');
+    }
+    
+    public function topLooser(TopLooserTable $dataTable)
+    {
+
+        return $dataTable->render('console.report.statistic.top-looser');
     }
 
 }
