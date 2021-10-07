@@ -17,17 +17,15 @@
                         </div>
 
                         <div class="col-sm-4 mb-4">
-                            <span class="badge badge-danger small">Coming Soon</span>
                             <h3>{{ __('Top Commission and OR Producer') }}</h3>
                             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                            <a class="btn btn-outline-info">{{ __('See Report') }}</a>
+                            <a href="{{ route('console.reports.statistics.top-commission') }}" class="btn btn-outline-info">{{ __('See Report') }}</a>
                         </div>
 
                         <div class="col-sm-4  mb-4">
-                            <span class="badge badge-danger small">Coming Soon</span>
                             <h3>{{ __('Top New Member Producer') }}</h3>
                             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                            <a class="btn btn-outline-info">{{ __('See Report') }}</a>
+                            <a href="{{ route('console.reports.statistics.top-new-member') }}" class="btn btn-outline-info">{{ __('See Report') }}</a>
                         </div>
 
                         <div class="col-sm-4 mb-4">

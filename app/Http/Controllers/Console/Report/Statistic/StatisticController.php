@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers\Console\Report\Statistic;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\DataTables\Console\UserDataTable;
 use App\Models\Admin;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
+use App\Models\TransactionType;
 use Spatie\Permission\Models\Role;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use App\DataTables\Console\UserDataTable;
 use App\DataTables\Console\CommissionTable;
 use App\DataTables\Console\Report\SymbolTable;
+use App\DataTables\Console\Report\TopNewMemberTable;
+use App\DataTables\Console\Report\TopCommissionTable;
 
 class StatisticController extends Controller
 {
@@ -21,6 +24,17 @@ class StatisticController extends Controller
     public function symbol(SymbolTable $dataTable)
     {
         return $dataTable->render('console.report.statistic.symbol');
+    }
+    
+    public function topCommission(TopCommissionTable $dataTable)
+    {
+        return $dataTable->render('console.report.statistic.top-commission');
+    }
+    
+    public function topNewMember(TopNewMemberTable $dataTable)
+    {
+
+        return $dataTable->render('console.report.statistic.top-new-member');
     }
 
 }

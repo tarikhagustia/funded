@@ -25,4 +25,9 @@ class Af extends Authenticatable
         return $this->agentname;
     }
 
+    public function clients()
+    {
+        return $this->hasMany(Client::class,'agentid');
+    }
+
 }
