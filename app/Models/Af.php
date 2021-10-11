@@ -30,4 +30,12 @@ class Af extends Authenticatable
         return $this->hasMany(Client::class,'agentid');
     }
 
+    public function childs(){
+        return $this->hasMany(Af::class,'parentid');
+    }
+
+    public function commissions(){
+        return $this->hasMany(AfCommission::class,'af_id');
+    }
+
 }

@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class AfCommission extends Model
 {
+
+    protected $connection = "mysql";
+
     use HasFactory;
 
     function agent(){
