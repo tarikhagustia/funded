@@ -14,7 +14,7 @@
                     </div>
                 </div>
                 <div class="card-body table-responsive">
-                    {{$dataTable->table()}}
+                    {{$dataTable->table([], true)}}
                 </div>
             </div>
         </div>

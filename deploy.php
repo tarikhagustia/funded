@@ -1,7 +1,6 @@
 <?php
 namespace Deployer;
 
-require 'recipe/laravel.php';
 
 // Project name
 set('application', 'my_project');
@@ -24,18 +23,11 @@ set('allow_anonymous_stats', false);
 
 host('dash.bullishfx.id')
     ->user('dev_bfx')
-    ->set('deploy_path', '/home/dev_bfx/web/report-dev.bullishfx.id');
+    ->set('deploy_path', '/home/dev_bfx/web/report-dev.bullishfx.id/public_html');
 
 // Tasks
-
-task('build', function () {
-    run('cd {{release_path}} && build');
+task('deploy', function () {
+    cd(get('deploy_path'));
+    $output = run('git pull && composer install && php artisan optimize');
+    writeln($output);
 });
-
-// [Optional] if deploy fails automatically unlock.
-after('deploy:failed', 'deploy:unlock');
-
-// Migrate database before symlink new release.
-
-// before('deploy:symlink', 'artisan:migrate');
-

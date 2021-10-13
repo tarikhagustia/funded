@@ -56,6 +56,43 @@ class CommissionTable extends DataTable
     public function html()
     {
         return $this->builder()
+                    ->footerCallback("
+                    function ( row, data, start, end, display ) {
+            var api = this.api(), data;
+ 
+            // Remove the formatting to get integer data for summation
+            var intVal = function ( i ) {
+                return typeof i === 'string' ?
+                    i.replace(/[\$,]/g, '')*1 :
+                    typeof i === 'number' ?
+                        i : 0;
+            };
+            
+            let sum_columns  = [7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24];
+            sum_columns.forEach(function(val, index){
+                // Total over all pages
+                total = api
+                    .column(val)
+                    .data()
+                    .reduce( function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0 );
+     
+                // Total over this page
+                pageTotal = api
+                    .column(val, { page: 'current'} )
+                    .data()
+                    .reduce( function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0 );
+                // Update footer
+                $( api.column(val).footer() ).html(
+                   total.toFixed(2)
+                );
+            })
+            
+        }
+                    ")
                     ->setTableId('commission-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
