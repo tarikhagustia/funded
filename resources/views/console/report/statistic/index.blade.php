@@ -39,19 +39,19 @@
                             <a href="{{ route('console.withdrawals.index') }}" class="btn btn-outline-info">{{ __('See Report') }}</a>
                         </div>
 
-                        <div class="col-sm-4 mb-4">
-                            <span class="badge badge-danger small">Coming Soon</span>
-                            <h3>{{ __('Last Initial Margin') }}</h3>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                            <a class="btn btn-outline-info">{{ __('See Report') }}</a>
-                        </div>
+{{--                        <div class="col-sm-4 mb-4">--}}
+{{--                            <span class="badge badge-danger small">Coming Soon</span>--}}
+{{--                            <h3>{{ __('Last Initial Margin') }}</h3>--}}
+{{--                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>--}}
+{{--                            <a class="btn btn-outline-info">{{ __('See Report') }}</a>--}}
+{{--                        </div>--}}
 
-                        <div class="col-sm-4 mb-4">
-                            <span class="badge badge-danger small">Coming Soon</span>
-                            <h3>{{ __('Most Active Member') }}</h3>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                            <a class="btn btn-outline-info">{{ __('See Report') }}</a>
-                        </div>
+{{--                        <div class="col-sm-4 mb-4">--}}
+{{--                            <span class="badge badge-danger small">Coming Soon</span>--}}
+{{--                            <h3>{{ __('Most Active Member') }}</h3>--}}
+{{--                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>--}}
+{{--                            <a class="btn btn-outline-info">{{ __('See Report') }}</a>--}}
+{{--                        </div>--}}
 
                         <div class="col-sm-4 mb-4">
                             <h3>{{ __('Symbol Statistic') }}</h3>
@@ -64,7 +64,7 @@
                             <p>{{ __('Displaying closed order who closed less than 3 minutes.') }}</p>
                             <a href="{{ route('console.closed-order-by-lq.index') }}" class="btn btn-outline-info">{{ __('See Report') }}</a>
                         </div>
-                        
+
                         <div class="col-sm-4 mb-4">
                             <h3>{{ __('Affiliate Commission') }}</h3>
                             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
