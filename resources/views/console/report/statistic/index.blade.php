@@ -11,19 +11,19 @@
                     <div class="row">
                         <div class="col-sm-4 mb-4">
                             <h3>{{ __('Top Looser') }}</h3>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                            <p>{{ __('Showing members who often lose.') }}</p>
                             <a href="{{ route('console.reports.statistics.top-looser') }}" class="btn btn-outline-info">{{ __('See Report') }}</a>
                         </div>
 
                         <div class="col-sm-4 mb-4">
                             <h3>{{ __('Top Commission and OR Producer') }}</h3>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                            <p>{{ __('Displaying affiliate who generate commission higer ') }}</p>
                             <a href="{{ route('console.reports.statistics.top-commission') }}" class="btn btn-outline-info">{{ __('See Report') }}</a>
                         </div>
 
                         <div class="col-sm-4  mb-4">
                             <h3>{{ __('Top New Member Producer') }}</h3>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                            <p>{{ __('Displaying Affiliate who get member higher.') }}.</p>
                             <a href="{{ route('console.reports.statistics.top-new-member') }}" class="btn btn-outline-info">{{ __('See Report') }}</a>
                         </div>
 
@@ -35,7 +35,7 @@
 
                         <div class="col-sm-4 mb-4">
                             <h3>{{ __('Last Member Transaction') }}</h3>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                            <p>{{ __('Displaying last member transaction such as Last Deposit, Withdrawal, Initial Margin etc.') }}</p>
                             <a href="{{ route('console.withdrawals.index') }}" class="btn btn-outline-info">{{ __('See Report') }}</a>
                         </div>
 
@@ -55,7 +55,7 @@
 
                         <div class="col-sm-4 mb-4">
                             <h3>{{ __('Symbol Statistic') }}</h3>
-                            <p>Displaying statistic about Symbol transaction like total position, total lot, total profit</p>
+                            <p>{{ __('Displaying statistic about Symbol transaction like total position, total lot, total profit') }}</p>
                             <a  href="{{ route('console.reports.statistics.symbol') }}" class="btn btn-outline-info">{{ __('See Report') }}</a>
                         </div>
 
@@ -67,7 +67,7 @@
 
                         <div class="col-sm-4 mb-4">
                             <h3>{{ __('Affiliate Commission') }}</h3>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                            <p>{{ __('Affiliate Commission Report') }}</p>
                             <a href="{{ route('console.reports.statistics.affiliate-commission') }}" class="btn btn-outline-info">{{ __('See Report') }}</a>
                         </div>
                     </div>
