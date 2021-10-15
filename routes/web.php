@@ -27,6 +27,21 @@ Route::middleware('auth:af')->group(function(){
     Route::prefix('/commissions')->group(function(){
         Route::get('/realtime-commissions', [\App\Http\Controllers\Af\RealtimeCommissionController::class, 'index'])->name('comm.realtime');
     });
+
+    Route::prefix('/costs-operations')->group(function(){
+        Route::get('/approval', [\App\Http\Controllers\Af\CostsOperationController::class, 'approval'])->name('costs-operation.approval');
+        Route::get('/approval/create', [\App\Http\Controllers\Af\CostsOperationController::class, 'create'])->name('costs-operation.approval.create');
+        
+        Route::get('/request', [\App\Http\Controllers\Af\CostsOperationController::class, 'request'])->name('costs-operation.request');
+        Route::get('/request/create', [\App\Http\Controllers\Af\CostsOperationController::class, 'create'])->name('costs-operation.request.create');
+        
+        Route::get('/{model}/edit', [\App\Http\Controllers\Af\CostsOperationController::class, 'edit'])->name('costs-operation.edit');
+        Route::get('/{model}/view', [\App\Http\Controllers\Af\CostsOperationController::class, 'view'])->name('costs-operation.view');
+        Route::post('/store', [\App\Http\Controllers\Af\CostsOperationController::class, 'store'])->name('costs-operation.store');
+        Route::put('{model}', [\App\Http\Controllers\Af\CostsOperationController::class, 'update'])->name('costs-operation.update');
+        Route::post('{model}/update-status', [\App\Http\Controllers\Af\CostsOperationController::class, 'updateStatus'])->name('costs-operation.update.status');
+        Route::delete('{model}', [\App\Http\Controllers\Af\CostsOperationController::class, 'destroy'])->name('costs-operation.destroy');
+    });
 });
 
 require __DIR__.'/admin.php';
