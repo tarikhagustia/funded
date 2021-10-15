@@ -14,6 +14,10 @@ class CommissionController extends Controller
 {
     public function index(CommissionTable $dataTable)
     {
-        return $dataTable->render('console.report.commission.index');
+        return $dataTable
+            ->with(array(
+                'report_type' => \request()->get('report_type')  ?? 'detail'
+            ))
+            ->render('console.report.commission.index');
     }
 }
