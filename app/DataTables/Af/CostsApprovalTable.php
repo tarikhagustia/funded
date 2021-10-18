@@ -49,7 +49,7 @@ class CostsApprovalTable extends DataTable
      */
     public function query()
     {
-        $query = AfOperational::where('af_id', '!=',Auth::id())->where('status','Pending');
+        $query = AfOperational::where('approval_af_id', Auth::id())->where('status','Pending');
 
         $tmpDate = explode(' - ', request()->input('range'));
         if (count($tmpDate) == 2) {

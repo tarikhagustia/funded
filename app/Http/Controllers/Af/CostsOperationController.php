@@ -10,6 +10,8 @@ use App\Http\Controllers\Controller;
 use App\Services\AfCommissionService;
 use App\DataTables\Af\CostsRequestTable;
 use App\DataTables\Af\CostsApprovalTable;
+use Symfony\Component\HttpFoundation\Response;
+use App\Services\WalletService;
 
 class CostsOperationController extends Controller
 {
@@ -39,7 +41,13 @@ class CostsOperationController extends Controller
             'date' => 'required',
         ]);
 
+        // Validate jika AF tersebut bukan level_on_group 4 maka af tidak bisa request
+        $parent = auth()->user()->parent;
+        if ($parent && $parent->level_on_group != 4) {
+            // return abort(Response::HTTP_FORBIDDEN);
+        }
         $request['af_id'] = auth()->id();
+        $request['approval_af_id'] = $parent->id;
 
         // Pending, Approved, Rejected
         $request['status'] = "Pending";
@@ -48,7 +56,7 @@ class CostsOperationController extends Controller
 
         try{
 
-            $new = AfOperational::create($request->only(['af_id','title', 'date','status','total']));
+            $new = AfOperational::create($request->only(['af_id','title', 'date','status','total','approval_af_id']));
 
             $new->items()->createMany($request['items']);
 
@@ -78,12 +86,15 @@ class CostsOperationController extends Controller
         return view('af.operations.view', compact('model'));
     }
 
-    
-    function updateStatus(Request $request, AfOperational $model){
+
+    function updateStatus(Request $request, AfOperational $model, WalletService $walletService){
         DB::beginTransaction();
 
         try{
-
+            // Store to wallet
+            if($request->input('status')) {
+                $walletService->credit($model->agent, $model->total, WalletService::OPERATIONAL, "Operational Cost #{$model->id}");
+            }
             $model->update($request->only(['status']));
 
             DB::commit();

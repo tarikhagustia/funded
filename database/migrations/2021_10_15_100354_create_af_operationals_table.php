@@ -16,6 +16,7 @@ class CreateAfOperationalsTable extends Migration
         Schema::create('af_operationals', function (Blueprint $table) {
             $table->id();
             $table->integer('af_id');
+            $table->integer('approval_af_id'); // ID AF Yang menyetujui
             $table->string('title');
             $table->double('total');
             $table->date('date');

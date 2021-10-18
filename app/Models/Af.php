@@ -38,4 +38,9 @@ class Af extends Authenticatable
         return $this->hasMany(AfCommission::class,'af_id');
     }
 
+    public function codes()
+    {
+        return $this->hasMany(AfCode::class, 'ref_id');
+    }
+
 }
