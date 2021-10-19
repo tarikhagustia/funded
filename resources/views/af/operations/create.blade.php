@@ -22,7 +22,11 @@
                                 </div>
 
                                 <div class="form-group" id="items">
-                                    <label for="items">{{ __('Items') }}</label>
+                                    
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <label for="items">{{ __('Items') }}</label>
+                                        <button type="button" class="btn btn-primary btn-sm" id="add-item"><i class="fa fa-plus"></i></button>
+                                    </div>
 
                                     <div class="row">
                                         <div class="col-6">
@@ -37,7 +41,7 @@
 
                                 <div class="form-group">
                                     <label for="date">{{ __('Date') }}</label>
-                                    <input class="form-control @error('date') is-invalid @enderror" id="date" name="date" type="date" placeholder="eg. T10-MC-LP" value="{{ old('date') }}">
+                                    <input class="form-control @error('date') is-invalid @enderror" id="date" name="date" value="{{date('Y-m-d')}}" type="date" placeholder="eg. T10-MC-LP" value="{{ old('date') }}">
                                     @error('date')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -45,7 +49,7 @@
 
                                 <div class="form-group">
                                     <button class="btn btn-primary"><i class="far fa-save"></i> {{ __('Submit') }}</button>
-                                    <button type="button" class="btn btn-primary" id="add-item"><i class="fa fa-plus"></i> {{ __('Add items') }}</button>
+                                    
                                 </div>
                             </form>
                         </div>

@@ -23,7 +23,10 @@
                                 </div>
 
                                 <div class="form-group" id="items">
-                                    <label for="items">{{ __('Items') }}</label>
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <label for="items">{{ __('Items') }}</label>
+                                        <button type="button" class="btn btn-primary btn-sm" id="add-item"><i class="fa fa-plus"></i></button>
+                                    </div>
 
                                     @foreach($model->items as $key => $item)
 
@@ -52,7 +55,6 @@
 
                                 <div class="form-group">
                                     <button class="btn btn-primary"><i class="far fa-save"></i> {{ __('Submit') }}</button>
-                                    <button type="button" class="btn btn-primary" id="add-item"><i class="fa fa-plus"></i> {{ __('Add Item') }}</button>
                                 </div>
                             </form>
                         </div>

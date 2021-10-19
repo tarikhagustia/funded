@@ -36,9 +36,30 @@ class CostsRequestTable extends DataTable
             // ->editColumn('name',function($model){
             //     return $model->agent->agentname;
             // })
+            ->editColumn('total',function($model){
+                return number_format($model->total);
+            })
+            ->editColumn('created_at',function($model){
+                return $model->created_at->format("Y-m-d H:i:s");
+            })
+            ->editColumn('status',function($model){
+                switch ($model->status) {
+                    case 'Approved':
+                        return "<span class='badge badge-success'>$model->status</status>";
+                        break;
+
+                    case 'Rejected':
+                        return "<span class='badge badge-danger'>$model->status</status>";
+                        break;
+                    
+                    default:
+                        return "<span class='badge badge-warning'>$model->status</status>";
+                        break;
+                }
+            })
             ->addColumn('action', 'af.operations.request.action')
             ->addIndexColumn()
-            ->rawColumns(['action']);
+            ->rawColumns(['action','status']);
     }
 
     /**
@@ -99,6 +120,7 @@ class CostsRequestTable extends DataTable
             // Column::make('name')->title('Name'),
             Column::make('status')->title('Status'),
             Column::make('total')->title('Total'),
+            Column::make('created_at')->title('Created Date'),
 
             Column::computed('action')
                   ->exportable(false)

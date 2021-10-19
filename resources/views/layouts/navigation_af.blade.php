@@ -29,11 +29,13 @@
         @if(auth()->user()->level_on_group == 4 || (auth()->user()->parent && auth()->user()->parent->level_on_group == 4))
             <li class="c-sidebar-nav-item c-sidebar-nav-dropdown"><a
                         class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
-                    <i class="c-sidebar-nav-icon fas fa-file-invoice-dollar"></i>
+                    <i class="c-sidebar-nav-icon fa fa-dollar-sign"></i>
                     {{ __('Operating costs') }}</a>
                 <ul class="c-sidebar-nav-dropdown-items">
                     <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('costs-operation.approval') }}">{{ __('Costs Approval') }}</a></li>
+                    @if(auth()->user()->parent)
                     <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('costs-operation.request') }}">{{ __('Costs Request') }}</a></li>
+                    @endif
                 </ul>
             </li>
         @endif

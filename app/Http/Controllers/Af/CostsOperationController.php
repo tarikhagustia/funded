@@ -45,7 +45,10 @@ class CostsOperationController extends Controller
         $parent = auth()->user()->parent;
         if ($parent && $parent->level_on_group != 4) {
             // return abort(Response::HTTP_FORBIDDEN);
+        }elseif(!$parent){
+            return redirect()->route($request->type)->with(['message_failed' => __('Failed Creating Record')]);
         }
+
         $request['af_id'] = auth()->id();
         $request['approval_af_id'] = $parent->id;
 
