@@ -17,6 +17,10 @@ class AfOperational extends Model
         return $this->belongsTo(Af::class,'af_id');
     }
 
+    function agentApproval(){
+        return $this->belongsTo(Af::class,'approval_af_id');
+    }
+
     function items(){
         return $this->hasMany(AfOperationalItem::class,'af_operational_id');
     }
