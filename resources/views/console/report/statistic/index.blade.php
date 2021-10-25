@@ -70,6 +70,12 @@
                             <p>{{ __('Affiliate Commission Report') }}</p>
                             <a href="{{ route('console.reports.statistics.affiliate-commission') }}" class="btn btn-outline-info">{{ __('See Report') }}</a>
                         </div>
+
+                        <div class="col-sm-4 mb-4">
+                            <h3>{{ __('Tree View') }}</h3>
+                            <p>{{ __('Displaying affliate treeview report') }}</p>
+                            <a href="{{ route('console.reports.statistics.treeview') }}" class="btn btn-outline-info">{{ __('See Report') }}</a>
+                        </div>
                     </div>
 
                 </div>

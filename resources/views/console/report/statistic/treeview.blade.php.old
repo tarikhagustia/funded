@@ -1,0 +1,89 @@
+@extends('layouts.main')
+
+@section('content')
+    <div class="container-fluid">
+        <div class="fade-in">
+            <div class="card">
+                <div class="card-header">
+                    {{ __('Treeview Report') }}
+                </div>
+                <div class="card-body">
+                    <h3 class="text-center">STRUKTUR ORGANISASI AFFILIATES BFX</h3>
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>AF1</th>
+                            <th>No</th>
+                            <th>AF2</th>
+                            <th>No</th>
+                            <th>AF3</th>
+                            <th>No</th>
+                            <th>AF4</th>
+                            <th>No</th>
+                            <th>AF5</th>
+                            <th>No</th>
+                            <th>AF6</th>
+                            <th>No</th>
+                            <th>AF7</th>
+                            <th>No</th>
+                            <th>AF8</th>
+                        </tr>
+
+                        </thead>
+                        <tbody>
+                        @foreach($af1 as $k1 => $row1)
+                            <tr>
+                                <td>{{ $k1 + 1 }}</td>
+                                <td>
+                                    {{ $row1->agentname }}
+                                    <p class="text-info">{{ $row1->agentemail }}</p>
+                                </td>
+                                @foreach($row1->children as $k2 => $af2)
+                                    <td>{{ $k1 + 1 }}</td>
+                                    <td>
+                                        {{ $af2->agentname }}
+                                        <p class="text-info">{{ $af2->agentemail }}</p>
+                                    </td>
+                                    @foreach($af2->children as $k3 => $af3)
+                                        <td>{{ $k3 + 1 }}</td>
+                                        <td>
+                                            {{ $af3->agentname }}
+                                            <p class="text-info">{{ $af3->agentemail }}</p>
+                                        </td>
+                                        @forelse($af3->children as $k4 => $af4)
+                                            @if ($af4->level_on_group != $af3->level_on_group + 1)
+                                                @for ($i = 0; $i < $af4->level_on_group - $af3->level_on_group - 1; $i++)
+                                                    <td></td>
+                                                    <td></td>
+                                                @endfor
+                                                    <td>{{ $k4 + 1 }}</td>
+                                                    <td>
+                                                        {{ $af4->agentname }}
+                                                        <p class="text-info">{{ $af4->agentemail }}</p>
+                                                    </td>
+                                            @endif
+                                        @empty
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        @endforelse
+                                    @endforeach
+                                @endforeach
+                            </tr>
+
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
