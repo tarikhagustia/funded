@@ -42,6 +42,11 @@ Route::prefix("/console")->name("console.")->group(function (){
         // User Management
         Route::resource('users', \App\Http\Controllers\Console\UserController::class);
 
+        // Role Management
+        Route::resource('/roles', \App\Http\Controllers\Console\RoleController::class)->except([
+            'show'
+        ]);
+
         // AF Management
         Route::resource('affiliates', \App\Http\Controllers\Console\AfController::class);
 
@@ -64,6 +69,7 @@ Route::prefix("/console")->name("console.")->group(function (){
             Route::get('/top-gainer', [\App\Http\Controllers\Console\Report\Statistic\StatisticController::class, 'topGainer'])->name('top-gainer');
             Route::get('/top-looser', [\App\Http\Controllers\Console\Report\Statistic\StatisticController::class, 'topLooser'])->name('top-looser');
             Route::get('/affiliate-commission', [\App\Http\Controllers\Console\Report\Statistic\StatisticController::class, 'affiliateCommission'])->name('affiliate-commission');
+            Route::get('/treeview', [\App\Http\Controllers\Console\Report\Statistic\StatisticController::class, 'treeViewReport'])->name('treeview');
         });
     });
 

@@ -8,9 +8,18 @@ use App\DataTables\Console\UserDataTable;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        // $this->middleware('can:Users');
+        // $this->middleware('can:create users')->only('create', 'store');
+        // $this->middleware('can:edit users')->only('edit', 'update');
+        // $this->middleware('can:delete users')->only('destroy');
+    }
+
     public function index(UserDataTable $dataTable)
     {
         return $dataTable->render('console.users.index');
@@ -45,6 +54,7 @@ class UserController extends Controller
     public function destroy(Admin $user)
     {
         $user->delete();
+
         return redirect()->route('console.users.index');
     }
 

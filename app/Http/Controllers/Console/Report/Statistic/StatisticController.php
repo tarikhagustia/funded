@@ -16,6 +16,7 @@ use App\DataTables\Console\Report\TopGainerTable;
 use App\DataTables\Console\Report\TopLooserTable;
 use App\DataTables\Console\Report\TopNewMemberTable;
 use App\DataTables\Console\Report\TopCommissionTable;
+use App\Models\Af;
 
 class StatisticController extends Controller
 {
@@ -28,34 +29,44 @@ class StatisticController extends Controller
     {
         return $dataTable->render('console.report.statistic.symbol');
     }
-    
+
     public function topCommission(TopCommissionTable $dataTable)
     {
         return $dataTable->render('console.report.statistic.top-commission');
     }
-    
+
     public function topNewMember(TopNewMemberTable $dataTable)
     {
 
         return $dataTable->render('console.report.statistic.top-new-member');
     }
-    
+
     public function topGainer(TopGainerTable $dataTable)
     {
 
         return $dataTable->render('console.report.statistic.top-gainer');
     }
-    
+
     public function topLooser(TopLooserTable $dataTable)
     {
 
         return $dataTable->render('console.report.statistic.top-looser');
     }
-    
+
     public function affiliateCommission(AffiliateCommissionTable $dataTable)
     {
 
         return $dataTable->render('console.report.statistic.affiliate-commission');
+    }
+
+    public function treeViewReport()
+    {
+        $af = Af::where('level_on_group', 8)->get();
+        return view('console.report.statistic.treeview', compact('af'));
+    }
+
+    public function callMe()
+    {
     }
 
 }
