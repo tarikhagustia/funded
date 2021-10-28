@@ -42,6 +42,11 @@ Route::prefix("/console")->name("console.")->group(function (){
         // User Management
         Route::resource('users', \App\Http\Controllers\Console\UserController::class);
 
+        // Role Management
+        Route::resource('/roles', \App\Http\Controllers\Console\RoleController::class)->except([
+            'show'
+        ]);
+
         // AF Management
         Route::resource('affiliates', \App\Http\Controllers\Console\AfController::class);
 
