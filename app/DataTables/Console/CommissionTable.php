@@ -65,7 +65,34 @@ class CommissionTable extends DataTable
                 $dateEnd = Carbon::parse($tmpDate[1])->endOfDay();
                 $query->whereBetween('transaction_date', [$dateStart, $dateEnd]);
             }
-        } else {
+        } elseif($this->report_type == "member") {
+            $query = DB::table($model->getTable())
+                       ->select(
+                           [
+                               'login',
+                               DB::raw('SUM(new_account) as new_account'),
+                               DB::raw('SUM(lot) as total_lot'),
+                               DB::raw('SUM(comm_idr) as comm_idr'),
+                               DB::raw('SUM(or_idr) as or_idr'),
+                               DB::raw('SUM(bop_idr) as bop_idr'),
+                               DB::raw('SUM(total_rebate) as total_rebate'),
+                               DB::raw('SUM(prev_equity) as prev_equity'),
+                               DB::raw('SUM(net_margin_in_out) as net_margin_in_out'),
+                               DB::raw('SUM(current_equity) as current_equity'),
+                               DB::raw('SUM(credit) as credit'),
+                               DB::raw('SUM(profit_loss) as profit_loss'),
+                               DB::raw('SUM(net_profit_loss) as net_profit_loss'),
+                               DB::raw('SUM(agent_pl) as agent_pl'),
+                               DB::raw('SUM(holding_pl) as holding_pl'),
+                           ])
+                       ->groupBy('login');
+            $tmpDate = explode(' - ', request()->input('range'));
+            if (count($tmpDate) == 2) {
+                $dateStart = Carbon::parse($tmpDate[0])->startOfDay();
+                $dateEnd = Carbon::parse($tmpDate[1])->endOfDay();
+                $query->whereBetween('transaction_date', [$dateStart, $dateEnd]);
+            }
+        }else{
             $query = DB::table($model->getTable());
             $tmpDate = explode(' - ', request()->input('range'));
             if (count($tmpDate) == 2) {
@@ -107,7 +134,7 @@ class CommissionTable extends DataTable
                             Button::make('print')
                         );
 
-        if ($this->report_type == "af") {
+        if ($this->report_type == "af" || $this->report_type == "member") {
             $builder
                 ->footerCallback("
                         function ( row, data, start, end, display ) {
@@ -199,6 +226,10 @@ class CommissionTable extends DataTable
         if ($this->report_type == "af") {
             return $this->getAfColumns();
         }
+
+        if ($this->report_type == "member") {
+            return $this->getMemberColumns();
+        }
         return [
             // Column::make('DT_RowIndex')->title(__('No'))->orderable(false)->searchable(false),
             Column::make('transaction_date'),
@@ -240,6 +271,58 @@ class CommissionTable extends DataTable
         return [
             // Column::make('DT_RowIndex')->title(__('No'))->orderable(false)->searchable(false),
             Column::make('af_name'),
+            Column::make('new_account'),
+            Column::make('total_lot'),
+            Column::make('comm_idr'),
+            Column::make('or_idr'),
+            Column::make('bop_idr'),
+            Column::make('total_rebate'),
+            Column::make('prev_equity'),
+            Column::make('net_margin_in_out'),
+            Column::make('current_equity'),
+            Column::make('credit'),
+            Column::make('profit_loss'),
+            Column::make('net_profit_loss'),
+            Column::make('agent_pl'),
+            Column::make('holding_pl'),
+            // Column::make('login'),
+            // Column::make('client_name'),
+            // Column::make('rate'),
+            // Column::make('ac_type'),
+            // Column::make('max_rebate'),
+            // Column::make('af_name'),
+            // Column::make('lot'),
+            // Column::make('comm'),
+            // Column::make('comm_idr'),
+            // Column::make('or'),
+            // Column::make('or_idr'),
+            // Column::make('bop'),
+            // Column::make('bop_idr'),
+            // Column::make('total_rebate'),
+            // Column::make('prev_equity'),
+            // Column::make('net_margin_in_out'),
+            // Column::make('current_equity'),
+            // Column::make('credit'),
+            // Column::make('net_equity'),
+            // Column::make('profit_loss'),
+            // Column::make('net_profit_loss'),
+            // Column::make('agent_percentage'),
+            // Column::make('agent_pl'),
+            // Column::make('holding_pl'),
+            // Column::make('registration_date'),
+            // Column::computed('action')
+            //       ->exportable(false)
+            //       ->printable(false)
+            //       ->width(60)
+            //       ->addClass('text-center'),
+        ];
+    }
+
+    protected function getMemberColumns()
+    {
+        return [
+            // Column::make('DT_RowIndex')->title(__('No'))->orderable(false)->searchable(false),
+            Column::make('login'),
             Column::make('new_account'),
             Column::make('total_lot'),
             Column::make('comm_idr'),
