@@ -9,6 +9,9 @@
         <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('console.') }}">
                 <i class="c-sidebar-nav-icon fas fa-home"></i>
                 Dashboard<span class="badge badge-info">NEW</span></a></li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('console.operating-costs.index') }}">
+                <i class="c-sidebar-nav-icon fas fa-dollar-sign"></i>
+                Operating costs</a></li>
         <li class="c-sidebar-nav-item c-sidebar-nav-dropdown"><a
                     class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
                 <i class="c-sidebar-nav-icon fas fa-users"></i>

@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\Console\Auth\AuthenticatedSessionController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Console\OperatingCostsController;
+use App\Http\Controllers\Console\Auth\AuthenticatedSessionController;
 
 Route::prefix("/console")->name("console.")->group(function (){
 
@@ -21,6 +22,8 @@ Route::prefix("/console")->name("console.")->group(function (){
     Route::middleware(["auth:admin", "console"])->group(function (){
 
         Route::get("/", [\App\Http\Controllers\Console\DashboardController::class, 'index']);
+        Route::get("/operating-costs", [\App\Http\Controllers\Console\OperatingCostsController::class, 'index'])->name('operating-costs.index');
+        Route::get("/operating-costs/{model}", [\App\Http\Controllers\Console\OperatingCostsController::class, 'show'])->name('operating-costs.view');
 
           Route::prefix('clients')->name("clients.")->group(function(){
                Route::get('/',[\App\Http\Controllers\Console\ClientController::class, 'index'])->name('index');
