@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
         <!-- Styles -->
         <link href="{{ mix('css/style.css') }}" rel="stylesheet">
+        <link rel="shortcut icon" href="{{ asset('faicon.png') }}" type="image/png"/>
     </head>
     <body class="c-app flex-row align-items-center">
     <div class="container">
