@@ -27,10 +27,10 @@ class OperatingCostsTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->editColumn('af_id',function($model){
-                return $model->agent->agentname;
+                return $model->agent->agentname ?? '-';
             })
             ->editColumn('approval_af_id',function($model){
-                return $model->agentApproval->agentname;
+                return $model->agentApproval->agentname ?? '-';
             })
             ->editColumn('total',function($model){
                 return number_format($model->total);
@@ -43,7 +43,7 @@ class OperatingCostsTable extends DataTable
                     case 'Rejected':
                         return "<span class='badge badge-danger'>$model->status</status>";
                         break;
-                    
+
                     default:
                         return "<span class='badge badge-warning'>$model->status</status>";
                         break;

@@ -39,8 +39,8 @@ class PermissionsTableSeeder extends Seeder
     private function permissions()
     {
         return [
-            'Client', 'Trading Account', 'Affiliate', 'Users', 'Roles', 'General Commission', 'Report Top Looser', 'Top Commission and OR Producer',
-            'Top New Member Producer', 'Top Gainer', 'Last Member Transaction', 'Symbol Statistic', 'Closed Order By LQ Time', 'Affiliate Commission', 'Tree View'
+            'Client', 'Trading Account', 'Affiliate', 'Users', 'Roles', 'General Commission', 'Top Looser', 'Top Commission and OR Producer',
+            'Top New Member Producer', 'Top Gainer', 'Last Member Transaction', 'Symbol Statistic', 'Closed Order By LQ Time', 'Affiliate Commission', 'Tree View', 'Operating Cost'
         ];
     }
 
