@@ -69,6 +69,9 @@
                 @can('General Commission')
                     <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('console.commissions.index') }}">{{ __('General Commission') }}</a></li>
                 @endcan
+                @can('Referral Bonus')
+                    <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('console.referral-bonus.index') }}">{{ __('Referral Bonus') }}</a></li>
+                @endcan
             </ul>
 {{--            <ul class="c-sidebar-nav-dropdown-items">--}}
 {{--                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('console.closed-order-by-lq.index') }}">{{ __('Closed Order By LQ Time') }}</a></li>--}}
