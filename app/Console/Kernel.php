@@ -30,6 +30,7 @@ class Kernel extends ConsoleKernel
         // Jam 10 Waktu UTC
         $schedule->command('transaction:get')->dailyAt('22:00');
         $schedule->command('af:commission:get')->dailyAt('22:00');
+        $schedule->command('af:commission:referral:get')->dailyAt('22:00');
     }
 
     /**
