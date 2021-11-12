@@ -8,51 +8,67 @@
     <ul class="c-sidebar-nav">
         <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('console.') }}">
                 <i class="c-sidebar-nav-icon fas fa-home"></i>
-                Dashboard<span class="badge badge-info">NEW</span></a></li>
-        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('console.operating-costs.index') }}">
-                <i class="c-sidebar-nav-icon fas fa-dollar-sign"></i>
-                Operating costs</a></li>
-        <li class="c-sidebar-nav-item c-sidebar-nav-dropdown"><a
-                    class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
-                <i class="c-sidebar-nav-icon fas fa-users"></i>
-                {{ __('Client Management') }}</a>
-            <ul class="c-sidebar-nav-dropdown-items">
-                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('console.clients.index') }}">{{ __('Clients') }}</a></li>
-                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('console.trading_accounts.index') }}">{{ __('Trading Accounts') }}</a></li>
-            </ul>
-        </li>
-        <li class="c-sidebar-nav-item c-sidebar-nav-dropdown"><a
-                    class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
-                <i class="c-sidebar-nav-icon fas fa-users"></i>
-                {{ __('Affiliates Management') }}</a>
-            <ul class="c-sidebar-nav-dropdown-items">
-                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('console.affiliates.index') }}">{{ __('Affiliates') }}</a></li>
-            </ul>
-        </li>
+                Dashboard</a></li>
+        @can('Operating Cost')
+            <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('console.operating-costs.index') }}">
+                    <i class="c-sidebar-nav-icon fas fa-dollar-sign"></i>
+                    Operating costs</a></li>
+            <li class="c-sidebar-nav-item c-sidebar-nav-dropdown"><a
+                        class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+                    <i class="c-sidebar-nav-icon fas fa-users"></i>
+                    {{ __('Client Management') }}</a>
+                <ul class="c-sidebar-nav-dropdown-items">
+                    <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('console.clients.index') }}">{{ __('Clients') }}</a></li>
+                    <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('console.trading_accounts.index') }}">{{ __('Trading Accounts') }}</a></li>
+                </ul>
+            </li>
+        @endcan
+
+        @can('Affiliate')
+            <li class="c-sidebar-nav-item c-sidebar-nav-dropdown"><a
+                        class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+                    <i class="c-sidebar-nav-icon fas fa-users"></i>
+                    {{ __('Affiliates Management') }}</a>
+                <ul class="c-sidebar-nav-dropdown-items">
+                    <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('console.affiliates.index') }}">{{ __('Affiliates') }}</a></li>
+                </ul>
+            </li>
+        @endcan
+
+        @canany(['Users', 'Roles'])
         <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
             <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
                 <i class="c-sidebar-nav-icon fas fa-users"></i>
                 {{ __('User Management') }}
             </a>
+
             <ul class="c-sidebar-nav-dropdown-items">
-                <li class="c-sidebar-nav-item">
-                    <a class="c-sidebar-nav-link" href="{{ route('console.users.index') }}">
-                        {{ __('Users') }}
-                    </a>
-                </li>
+                @can('Users')
+                    <li class="c-sidebar-nav-item">
+                        <a class="c-sidebar-nav-link" href="{{ route('console.users.index') }}">
+                            {{ __('Users') }}
+                        </a>
+                    </li>
+                @endcan
+
+                @can('Roles')
                 <li>
                     <a class="c-sidebar-nav-link" href="{{ route('console.roles.index') }}">
                         {{ __('Roles') }}
                     </a>
                 </li>
+                @endcan
             </ul>
         </li>
+        @endcanany
         <li class="c-sidebar-nav-item c-sidebar-nav-dropdown"><a
                     class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
                 <i class="c-sidebar-nav-icon fas fa-file-invoice"></i>
                 {{ __('Report') }}</a>
             <ul class="c-sidebar-nav-dropdown-items">
-                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('console.commissions.index') }}">{{ __('General Commission') }}</a></li>
+                @can('General Commission')
+                    <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('console.commissions.index') }}">{{ __('General Commission') }}</a></li>
+                @endcan
             </ul>
 {{--            <ul class="c-sidebar-nav-dropdown-items">--}}
 {{--                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('console.closed-order-by-lq.index') }}">{{ __('Closed Order By LQ Time') }}</a></li>--}}

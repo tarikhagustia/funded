@@ -12,6 +12,7 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="assets/favicon/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
+    <link rel="shortcut icon" href="{{ asset('faicon.png') }}" type="image/png"/>
     @livewireStyles
     <link href="{{ mix('css/style.css') }}" rel="stylesheet">
     @stack('stylesheet')
