@@ -30,13 +30,13 @@
     <script type="text/javascript">
         $(function() {
 
-            var start = moment();
+            var start = moment().subtract(1, 'months');
             var end = moment();
 
             function cb(start, end) {
 
                 $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-                window.LaravelDataTables["commission-table"].draw();
+                window.LaravelDataTables["referral-bonus-table"].draw();
             }
 
             $('#reportrange').daterangepicker({

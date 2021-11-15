@@ -8,7 +8,6 @@ use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\Html\Builder;
 use Yajra\DataTables\DataTableAbstract;
 use Carbon\Carbon;
-use App\Models\AfCommission;
 use App\Models\ReferralBonus;
 
 class ReferralBonusTable extends DataTable
@@ -38,7 +37,14 @@ class ReferralBonusTable extends DataTable
      */
     public function query(ReferralBonus $model)
     {
-        return $model->newQuery();
+        $query = $model->newQuery();
+        $tmpDate = explode(' - ', request()->input('range'));
+        if (count($tmpDate) == 2) {
+            $dateStart = Carbon::parse($tmpDate[0])->startOfDay();
+            $dateEnd = Carbon::parse($tmpDate[1])->endOfDay();
+            $query->whereBetween('comm_date', [$dateStart, $dateEnd]);
+        }
+        return $query;
     }
 
     /**
