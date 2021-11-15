@@ -86,7 +86,7 @@ class ReferralBonusTable extends DataTable
             Column::make('comm_date')->title(__('Date')),
             Column::make('af_name')->title('Af Name'),
             Column::make('login')->title('Login'),
-            Column::make('client_name')->title('Client Name'),
+            Column::make('client_name')->title('Member Name'),
             Column::make('af_percentage')->title('Percentage'),
             Column::make('lot')->title('Lot'),
             Column::make('total_commission')->title('Total Commission'),
