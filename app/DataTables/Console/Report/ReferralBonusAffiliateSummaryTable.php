@@ -39,7 +39,7 @@ class ReferralBonusAffiliateSummaryTable extends DataTable
     public function query(ReferralBonus $model)
     {
         $query = $model->newQuery()
-                       ->select(['af_name', DB::raw('SUM(lot) as total_lot'), DB::raw('SUM(total_commission) as total_commission')])
+                       ->select(['af_name', DB::raw('ROUND(SUM(lot), 2) as total_lot'), DB::raw('ROUND(SUM(total_commission), 2) as total_commission')])
                        ->where('lot', '>', 0)->groupBy('af_name');
         $tmpDate = explode(' - ', request()->input('range'));
         if (count($tmpDate) == 2) {
