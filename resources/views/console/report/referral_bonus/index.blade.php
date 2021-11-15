@@ -14,6 +14,16 @@
                     </div>
                 </div>
                 <div class="card-body table-responsive">
+                    <form class="row" id="report-filter" method="get">
+                        <div class="form-group col-sm-4">
+                            <label>Report Type</label>
+                            <select class="form-control" onchange="$('#report-filter').submit();" name="report_type">
+                                <option value="af" {{ request()->get('report_type') == 'af' ? 'selected' : null }}>Summary by Affiliate</option>
+                                <option value="detail" {{ request()->get('report_type') == 'detail' ? 'selected' : null }}>Detail</option>
+                                {{--                                <option value="month" {{ request()->get('report_type') == 'month' ? 'selected' : null }}>Summary by Month</option>--}}
+                            </select>
+                        </div>
+                    </form>
                     {{$dataTable->table([], true)}}
                 </div>
             </div>
