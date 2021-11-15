@@ -37,7 +37,7 @@ class ReferralBonusTable extends DataTable
      */
     public function query(ReferralBonus $model)
     {
-        $query = $model->newQuery();
+        $query = $model->newQuery()->where('lot', '>' , 0);
         $tmpDate = explode(' - ', request()->input('range'));
         if (count($tmpDate) == 2) {
             $dateStart = Carbon::parse($tmpDate[0])->startOfDay();
