@@ -6,6 +6,7 @@ use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Console\Commands\TransactionCommand;
 use App\Console\Commands\AfCommissionCommand;
+use App\Console\Commands\FixTreeCommand;
 
 class Kernel extends ConsoleKernel
 {
@@ -16,7 +17,8 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         TransactionCommand::class,
-        AfCommissionCommand::class
+        AfCommissionCommand::class,
+        FixTreeCommand::class
     ];
 
     /**
@@ -31,6 +33,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('transaction:get')->dailyAt('22:00');
         $schedule->command('af:commission:get')->dailyAt('22:00');
         $schedule->command('af:commission:referral:get')->dailyAt('22:00');
+        $schedule->command('member:fix:tree')->everyTenMinutes();
     }
 
     /**

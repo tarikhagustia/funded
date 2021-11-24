@@ -15,7 +15,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             CreateAdminTableSeeder::class,
-            AfLevelsTableSeeder::class
+            AfLevelsTableSeeder::class,
+            PermissionsTableSeeder::class
         ]);
     }
 }
