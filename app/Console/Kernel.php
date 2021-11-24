@@ -33,7 +33,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('transaction:get')->dailyAt('22:00');
         $schedule->command('af:commission:get')->dailyAt('22:00');
         $schedule->command('af:commission:referral:get')->dailyAt('22:00');
-        $schedule->command('member:fix:tree')->everyTenMinutes();
+        // $schedule->command('member:fix:tree')->everyTenMinutes();
     }
 
     /**
