@@ -32,6 +32,10 @@
     </div>
 @endsection
 
+@push('stylesheet')
+    <link href="https://cdn.datatables.net/fixedheader/3.2.0/css/fixedHeader.bootstrap4.min.css" rel="stylesheet">
+@endpush
+
 @push('javascript')
     {{ $dataTable->scripts() }}
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>

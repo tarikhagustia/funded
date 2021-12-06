@@ -24,8 +24,8 @@
     @include('layouts.navigation_af')
 @endif
 
-<div class="c-wrapper c-fixed-components">
-    <header class="c-header c-header-light c-header-fixed c-header-with-subheader">
+<div class="c-wrapper">
+    <header class="c-header c-header-light c-header-with-subheader">
         <button class="c-header-toggler c-class-toggler d-lg-none mfe-auto" type="button" data-target="#sidebar"
                 data-class="c-sidebar-show">
             <i class="c-icon c-icon-lg fas fa-bars">
