@@ -39,10 +39,7 @@
                         @can('Top Gainer')
                             <div class="col-sm-4 mb-4">
                                 <h3>{{ __('Top Gainer') }}</h3>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                    Ipsum
-                                    has been the industry's standard dummy text ever since the 1500s, when an unknown
-                                    printer took a galley of type and scrambled it to make a type specimen book.</p>
+                                <p>{{ __('Displaying member who become top gainer') }}.</p>
                                 <a href="{{ route('console.reports.statistics.top-gainer') }}"
                                    class="btn btn-outline-info">{{ __('See Report') }}</a>
                             </div>

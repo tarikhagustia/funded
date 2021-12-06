@@ -31,5 +31,10 @@ class TransactionCrm extends Model
         return $this->belongsTo(Account::class, 'accid');
     }
 
+    public function agent()
+    {
+        return $this->belongsTo(Af::class, 'agentid');
+    }
+
 
 }

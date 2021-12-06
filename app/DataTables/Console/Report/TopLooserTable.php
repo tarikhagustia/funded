@@ -36,13 +36,17 @@ class TopLooserTable extends DataTable
      */
     public function query()
     {
-
+        $crmDatabase = DB::connection('crm')->getDatabaseName();
         $query = DB::connection('mt4')->table('MT4_TRADES', 'mt')
-                   ->join('MT4_USERS as u', 'u.LOGIN', '=', 'mt.LOGIN')
-                   ->select(['mt.LOGIN', DB::raw('SUM(PROFIT) as TOTAL'), 'u.EMAIL', 'u.NAME'])
-                   ->whereIn('CMD', [1, 0])
-                   ->groupBy('u.LOGIN')
-                   ->orderByRaw('SUM(PROFIT) ASC');
+            ->join('MT4_USERS as u', 'u.LOGIN', '=', 'mt.LOGIN')
+            ->join($crmDatabase . ".accounts as a", "a.accountid", '=', 'u.LOGIN')
+            ->join($crmDatabase . '.clients as c', 'c.id', '=', 'a.userid')
+            ->join($crmDatabase . '.agents_code as ac', 'ac.id', '=', 'a.comm_id')
+            ->join($crmDatabase . '.agents as ag', 'ag.id', '=', 'ac.ref_id')
+            ->select(['mt.LOGIN', DB::raw('SUM(PROFIT) as TOTAL'), 'u.EMAIL', 'u.NAME', 'ag.id as af_id', 'ag.agentname'])
+            ->whereIn('CMD', [1, 0])
+            ->groupBy('u.LOGIN')
+            ->orderByRaw('SUM(PROFIT) ASC');
 
         $tmpDate = explode(' - ', request()->input('range'));
         if (count($tmpDate) == 2) {
@@ -62,23 +66,23 @@ class TopLooserTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('top-looser-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    ->fixedHeader(true)
-                    ->dom('Bfrtip')
-                    ->orderBy(1)
-                    ->ajax([
-                        'data' => 'function(d) {
+            ->setTableId('top-looser-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            ->fixedHeader(true)
+            ->dom('Bfrtip')
+            ->orderBy(1)
+            ->ajax([
+                'data' => 'function(d) {
                             d.range = $("#reportrange span").html();
                         }'
-                    ])
-                    ->buttons(
-                        Button::make('colvis'),
-                        Button::make('pageLength'),
-                        Button::make('export'),
-                        Button::make('print')
-                    );
+            ])
+            ->buttons(
+                Button::make('colvis'),
+                Button::make('pageLength'),
+                Button::make('export'),
+                Button::make('print')
+            );
     }
 
     /**
@@ -90,10 +94,12 @@ class TopLooserTable extends DataTable
     {
         return [
             Column::make('DT_RowIndex')->title(__('No'))->orderable(false)->searchable(false),
-            Column::make('LOGIN')->title('Login'),
-            Column::make('NAME')->title('Name'),
-            Column::make('EMAIL')->title('Email'),
-            Column::make('TOTAL')->title('Total Profit'),
+            Column::make('af_id', 'ag.id')->title('Af ID'),
+            Column::make('agentname', 'ag.agentname')->title('Af Name'),
+            Column::make('LOGIN', 'u.LOGIN')->title('Login'),
+            Column::make('NAME', 'u.NAME')->title('Name'),
+            Column::make('EMAIL', 'u.EMAIL')->title('Email'),
+            Column::make('TOTAL')->title('Total Profit')->searchable(false),
         ];
     }
 

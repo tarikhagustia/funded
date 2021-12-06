@@ -86,9 +86,10 @@ class TopNewMemberTable extends DataTable
     {
         return [
             Column::make('DT_RowIndex')->title(__('No'))->orderable(false)->searchable(false),
-            Column::make('agentname')->title('Name'),
+            Column::make('id')->title('Af ID'),
+            Column::make('agentname')->title('Af Name'),
             Column::make('agentemail')->title('Email'),
-            Column::make('total_new_member')->title('Total New Member'),
+            Column::make('total_new_member')->title('Total New Member')->searchable(false),
             Column::make('level_on_group')->title('Level'),
         ];
     }
