@@ -9,7 +9,7 @@ use Kalnoy\Nestedset\NodeTrait;
 
 class Af extends Authenticatable
 {
-    use HasFactory, Notifiable, NodeTrait;
+    use NodeTrait;
 
     protected $connection = "crm";
     protected $table = "agents";
@@ -41,6 +41,12 @@ class Af extends Authenticatable
     public function codes()
     {
         return $this->hasMany(AfCode::class, 'ref_id');
+    }
+
+    // Specify parent id attribute mutator
+    public function setParentAttribute($value)
+    {
+        $this->setParentIdAttribute($value);
     }
 
 }

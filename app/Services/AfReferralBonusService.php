@@ -30,7 +30,6 @@ class AfReferralBonusService
         $data = collect();
         // Get all affiliates from 4 to 8
         $affiliates = Af::where('level_on_group', '>=', 4)
-                        ->where('id', 44)
                         ->get();
         foreach ($affiliates as $affiliate) {
             // Get all children

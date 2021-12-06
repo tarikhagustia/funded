@@ -7,6 +7,8 @@
     </div>
     <ul class="c-sidebar-nav">
         <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ url('/') }}">
+            <i class="c-sidebar-nav-icon fas fa-home"></i>
+            Dashboard</a></li>
 {{--        <li class="c-sidebar-nav-title">Settings</li>--}}
         <li class="c-sidebar-nav-item c-sidebar-nav-dropdown"><a
                     class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
@@ -24,6 +26,7 @@
                 {{ __('My Commission') }}</a>
             <ul class="c-sidebar-nav-dropdown-items">
                 <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('comm.realtime') }}">{{ __('Commission') }}</a></li>
+                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('comm.referral_bonus') }}">{{ __('Referral Commission') }}</a></li>
             </ul>
         </li>
         @if(auth()->user()->level_on_group == 4 || (auth()->user()->parent && auth()->user()->parent->level_on_group == 4))

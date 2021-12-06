@@ -26,6 +26,7 @@ Route::middleware('auth:af')->group(function(){
 
     Route::prefix('/commissions')->group(function(){
         Route::get('/realtime-commissions', [\App\Http\Controllers\Af\RealtimeCommissionController::class, 'index'])->name('comm.realtime');
+        Route::get('/referral-bonus', [\App\Http\Controllers\Af\ReferralCommissionController::class, 'index'])->name('comm.referral_bonus');
     });
 
     Route::prefix('/costs-operations')->group(function(){

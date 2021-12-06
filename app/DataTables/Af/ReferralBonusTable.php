@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DataTables\Console\Report;
+namespace App\DataTables\Af;
 
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
@@ -9,6 +9,7 @@ use Yajra\DataTables\Html\Builder;
 use Yajra\DataTables\DataTableAbstract;
 use Carbon\Carbon;
 use App\Models\ReferralBonus;
+use Illuminate\Support\Facades\Auth;
 
 class ReferralBonusTable extends DataTable
 {
@@ -37,7 +38,7 @@ class ReferralBonusTable extends DataTable
      */
     public function query(ReferralBonus $model)
     {
-        $query = $model->newQuery()->where('lot', '>' , 0);
+        $query = $model->newQuery()->where('lot', '>' , 0)->where('af_id', Auth::id());
         $tmpDate = explode(' - ', request()->input('range'));
         if (count($tmpDate) == 2) {
             $dateStart = Carbon::parse($tmpDate[0])->startOfDay();
@@ -55,10 +56,10 @@ class ReferralBonusTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('referral-bonus-table')
+                    ->setTableId('commission-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->orderBy(0, 'desc')
+                    ->orderBy(1, 'desc')
                     ->dom('Bfrtip')
                     ->buttons(
                     // Button::make('create'),
@@ -84,9 +85,8 @@ class ReferralBonusTable extends DataTable
         return [
             Column::make('DT_RowIndex')->title(__('No'))->orderable(false)->searchable(false),
             Column::make('comm_date')->title(__('Date')),
-            Column::make('af_name')->title('Af Name'),
+            Column::make('client_name')->title('From Member Name'),
             Column::make('login')->title('Login'),
-            Column::make('client_name')->title('Member Name'),
             Column::make('af_percentage')->title('Percentage'),
             Column::make('lot')->title('Lot'),
             Column::make('total_commission')->title('Total Commission'),

@@ -9,8 +9,9 @@ use Yajra\DataTables\Html\Builder;
 use Yajra\DataTables\DataTableAbstract;
 use Carbon\Carbon;
 use App\Models\ReferralBonus;
+use Illuminate\Support\Facades\DB;
 
-class ReferralBonusTable extends DataTable
+class ReferralBonusAffiliateSummaryTable extends DataTable
 {
     public function __construct()
     {
@@ -37,7 +38,9 @@ class ReferralBonusTable extends DataTable
      */
     public function query(ReferralBonus $model)
     {
-        $query = $model->newQuery()->where('lot', '>' , 0);
+        $query = $model->newQuery()
+                       ->select(['af_name', DB::raw('ROUND(SUM(lot), 2) as total_lot'), DB::raw('ROUND(SUM(total_commission), 2) as total_commission')])
+                       ->where('lot', '>', 0)->groupBy('af_name');
         $tmpDate = explode(' - ', request()->input('range'));
         if (count($tmpDate) == 2) {
             $dateStart = Carbon::parse($tmpDate[0])->startOfDay();
@@ -83,12 +86,8 @@ class ReferralBonusTable extends DataTable
     {
         return [
             Column::make('DT_RowIndex')->title(__('No'))->orderable(false)->searchable(false),
-            Column::make('comm_date')->title(__('Date')),
             Column::make('af_name')->title('Af Name'),
-            Column::make('login')->title('Login'),
-            Column::make('client_name')->title('Member Name'),
-            Column::make('af_percentage')->title('Percentage'),
-            Column::make('lot')->title('Lot'),
+            Column::make('total_lot')->title('Total Lot'),
             Column::make('total_commission')->title('Total Commission'),
             // Column::make('lot')->orderable(false)->searchable(false)->title('Lot'),
             // Column::make('total_commission')->orderable(false)->searchable(false)->title('Total Commission'),
