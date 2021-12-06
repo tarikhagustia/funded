@@ -65,6 +65,7 @@ class SymbolTable extends DataTable
                     ->setTableId('statistic-symbol-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
+                    ->fixedHeader(true)
                     ->orderBy(0, 'desc')
                     ->dom('Bfrtip')
                     ->stateSave(true)

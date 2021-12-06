@@ -61,6 +61,7 @@ class ReferralBonusAffiliateSummaryTable extends DataTable
                     ->setTableId('referral-bonus-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
+                    ->fixedHeader(true)
                     ->orderBy(0, 'desc')
                     ->dom('Bfrtip')
                     ->buttons(

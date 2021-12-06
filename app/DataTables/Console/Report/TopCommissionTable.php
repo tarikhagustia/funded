@@ -60,6 +60,7 @@ class TopCommissionTable extends DataTable
                     ->setTableId('top-commission-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
+                    ->fixedHeader(true)
                     ->dom('Bfrtip')
                     ->orderBy(1)
                     ->ajax([

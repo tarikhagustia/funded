@@ -61,6 +61,7 @@ class TopNewMemberTable extends DataTable
                     ->setTableId('top-new-member-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
+                    ->fixedHeader(true)
                     ->dom('Bfrtip')
                     ->orderBy(1)
                     ->ajax([

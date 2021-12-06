@@ -64,6 +64,7 @@ class TopGainerTable extends DataTable
         return $this->builder()
                     ->setTableId('top-gainer-table')
                     ->columns($this->getColumns())
+                    ->fixedHeader(true)
                     ->minifiedAjax()
                     ->dom('Bfrtip')
                     ->orderBy(1)

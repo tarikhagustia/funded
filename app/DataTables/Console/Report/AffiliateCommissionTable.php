@@ -74,6 +74,7 @@ class AffiliateCommissionTable extends DataTable
                     ->minifiedAjax()
                     ->orderBy(0, 'desc')
                     ->dom('Bfrtip')
+                    ->fixedHeader(true)
                     ->buttons(
                     // Button::make('create'),
                         Button::make('colvis'),

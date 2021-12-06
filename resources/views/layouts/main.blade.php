@@ -15,6 +15,7 @@
     <link rel="shortcut icon" href="{{ asset('faicon.png') }}" type="image/png"/>
     @livewireStyles
     <link href="{{ mix('css/style.css') }}" rel="stylesheet">
+    <link href="https://cdn.datatables.net/fixedheader/3.2.0/css/fixedHeader.bootstrap4.min.css" rel="stylesheet">
     @stack('stylesheet')
 </head>
 <body class="c-app">
@@ -108,6 +109,7 @@
 <script src="{{ mix('js/app.js') }}"></script>
 <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
 <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.colVis.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/fixedheader/3.2.0/js/dataTables.fixedHeader.min.js"></script>
 @livewireScripts
 @stack('javascript')
 <script type="text/javascript">

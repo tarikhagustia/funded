@@ -65,6 +65,7 @@ class TopLooserTable extends DataTable
                     ->setTableId('top-looser-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
+                    ->fixedHeader(true)
                     ->dom('Bfrtip')
                     ->orderBy(1)
                     ->ajax([
