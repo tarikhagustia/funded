@@ -21,6 +21,7 @@
                                 <option value="detail" {{ request()->get('report_type') == 'detail' ? 'selected' : null }}>Detail</option>
                                 <option value="af" {{ request()->get('report_type') == 'af' ? 'selected' : null }}>Summary by Affiliate</option>
                                 <option value="member" {{ request()->get('report_type') == 'member' ? 'selected' : null }}>Summary by Member</option>
+                                <option value="af_5" {{ request()->get('report_type') == 'af_5' ? 'selected' : null }}>Summary by Country Manager</option>
 {{--                                <option value="month" {{ request()->get('report_type') == 'month' ? 'selected' : null }}>Summary by Month</option>--}}
                             </select>
                         </div>
