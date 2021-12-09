@@ -1,6 +1,6 @@
 <div class="c-sidebar c-sidebar-dark c-sidebar-lg-show" id="sidebar">
     <div class="c-sidebar-brand d-lg-down-none">
-        <img class="c-sidebar-brand-full" src="{{ asset('images/logo-small.png') }}">
+        <img class="c-sidebar-brand-full img-fluid" src="{{ asset('images/logo.png') }}" style="width: 150px"><span class="font-weight-bold text-white">BETA</span>
 {{--        <svg class="c-sidebar-brand-minimized" width="46" height="46" alt="CoreUI Logo">--}}
 {{--            <use xlink:href="assets/brand/coreui.svg#signet"></use>--}}
 {{--        </svg>--}}
