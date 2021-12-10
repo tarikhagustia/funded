@@ -21,7 +21,7 @@ class CreateAdminTableSeeder extends Seeder
         $role = Role::create(['name' => 'Administrator', 'guard_name' => 'admin']);
         $admin = Admin::create([
            'name' => 'Administrator',
-           'email' => 'admin@bullishfx.id',
+           'email' => 'admin@demo.id',
            'password' => Hash::make('Password123')
         ]);
         $admin->assignRole($role);
