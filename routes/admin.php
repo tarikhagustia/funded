@@ -66,6 +66,8 @@ Route::prefix("/console")->name("console.")->group(function (){
 
         Route::resource('reports/referral-bonus', \App\Http\Controllers\Console\Report\ReferralBonusController::class)->only('index');
 
+        Route::resource('reports/net-margin-bonus', \App\Http\Controllers\Console\Report\NetMarginBonusController::class)->only('index');
+
         Route::prefix('reports/statistics')->name('reports.statistics.')->group(function(){
             Route::get('/', [\App\Http\Controllers\Console\Report\Statistic\StatisticController::class, 'index'])->name('index');
             Route::get('/symbols', [\App\Http\Controllers\Console\Report\Statistic\StatisticController::class, 'symbol'])->name('symbol');

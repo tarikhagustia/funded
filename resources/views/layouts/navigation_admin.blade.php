@@ -72,6 +72,9 @@
                 @can('Referral Bonus')
                     <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('console.referral-bonus.index') }}">{{ __('Referral Bonus') }}</a></li>
                 @endcan
+                @can('Net Margin Bonus')
+                    <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('console.net-margin-bonus.index') }}">{{ __('Net Margin Bonus') }}</a></li>
+                @endcan
             </ul>
 {{--            <ul class="c-sidebar-nav-dropdown-items">--}}
 {{--                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('console.closed-order-by-lq.index') }}">{{ __('Closed Order By LQ Time') }}</a></li>--}}
