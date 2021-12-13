@@ -175,15 +175,15 @@ class NetMarginBonusService
     {
         $commissionData = collect();
         $hasGetCommission = [];
-
+        $dbName = DB::connection('crm')->getDatabaseName();
         $subQuery = DB::table('transactions', 't')
             ->selectRaw('t.af_id, COUNT(login) as new_member, SUM(initial.initial_margin) as initial_margin')
             ->join(DB::raw("(SELECT
                 a.accountid,
                 sum(t.amount) as initial_margin
             FROM
-                bfx_crm.transactions t
-            INNER JOIN bfx_crm.accounts a ON
+                {$dbName}.transactions t
+            INNER JOIN {$dbName}.accounts a ON
                 a.id = t.accid
             WHERE
                 t.transaction_type = 1 AND t.amount >= 150
