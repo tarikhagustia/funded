@@ -23,13 +23,13 @@ class WithdrawalTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->editColumn('userid',function($transaction){
+            ->editColumn('userid', function ($transaction) {
                 return $transaction->user->nama;
             })
-            ->editColumn('accid',function($transaction){
-                return $transaction->account->group->type_name;
+            ->editColumn('accid', function ($transaction) {
+                // return $transaction->account->group->type_name;
             })
-            ->editColumn('ipaddress',function($transaction){
+            ->editColumn('ipaddress', function ($transaction) {
                 return $transaction->ipaddress ? $transaction->ipaddress : '-';
             })
             ->addIndexColumn();
@@ -42,16 +42,16 @@ class WithdrawalTable extends DataTable
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(TransactionCrm $model)
-    {   
+    {
         $r_type = request()->input('type');
 
-        if($r_type){
-            $type = TransactionType::where('name',$r_type)->first();
-        }else{
-            $type = TransactionType::where('name','Withdrawal')->first();
+        if ($r_type) {
+            $type = TransactionType::where('name', $r_type)->first();
+        } else {
+            $type = TransactionType::where('name', 'Withdrawal')->first();
         }
 
-        $query = $model->newQuery()->where('transaction_type',$type->id);
+        $query = $model->newQuery()->where('transaction_type', $type->id);
 
         $tmpDate = explode(' - ', request()->input('range'));
         if (count($tmpDate) == 2) {
@@ -60,7 +60,10 @@ class WithdrawalTable extends DataTable
             $query->whereBetween('tdate', [$dateStart, $dateEnd]);
         }
 
-        $query->join('status','transactions.status','=','status.id')->select('transactions.*','status.name as status_name');
+        $query->join('status', 'transactions.status', '=', 'status.id')
+            ->join('agents as af', 'af.id', '=', 'transactions.agentid')
+            ->join('accounts as acc', 'acc.id', '=', 'transactions.accid')
+            ->select('transactions.*', 'status.name as status_name', 'af.agentname', 'acc.accountid');
 
         return $query;
     }
@@ -73,23 +76,23 @@ class WithdrawalTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('withdrawal-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    ->dom('Bfrtip')
-                    ->orderBy(1)
-                    ->ajax([
-                        'data' => 'function(d) {
+            ->setTableId('withdrawal-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            ->dom('Bfrtip')
+            ->orderBy(1)
+            ->ajax([
+                'data' => 'function(d) {
                             d.range = $("#reportrange span").html();
                             d.type = $("#select-type").val();
                         }'
-                    ])
-                    ->buttons(
-                        Button::make('colvis'),
-                        Button::make('pageLength'),
-                        Button::make('export'),
-                        Button::make('print')
-                    );
+            ])
+            ->buttons(
+                Button::make('colvis'),
+                Button::make('pageLength'),
+                Button::make('export'),
+                Button::make('print')
+            );
     }
 
     /**
@@ -101,11 +104,13 @@ class WithdrawalTable extends DataTable
     {
         return [
             Column::make('DT_RowIndex')->title(__('No'))->orderable(false)->searchable(false),
+            Column::make('agentid')->title('Af ID'),
+            Column::make('agentname', 'af.agentname')->title('Af Name'),
             Column::make('userid')->title('Client'),
-            Column::make('accid')->title('Account'),
+            Column::make('accountid', 'acc.accountid')->title('Account'),
             Column::make('amount')->title('Amount'),
             Column::make('ipaddress')->title('IP Address'),
-            Column::make('status_name')->title('Status'),
+            Column::make('status_name', 'status.name')->title('Status'),
             Column::make('tdate')->title('Transaction Date'),
         ];
     }

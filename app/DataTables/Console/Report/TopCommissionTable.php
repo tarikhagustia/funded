@@ -60,8 +60,9 @@ class TopCommissionTable extends DataTable
                     ->setTableId('top-commission-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
+                    ->fixedHeader(true)
                     ->dom('Bfrtip')
-                    ->orderBy(1)
+                    ->orderBy(5)
                     ->ajax([
                         'data' => 'function(d) {
                             d.range = $("#reportrange span").html();
@@ -84,7 +85,8 @@ class TopCommissionTable extends DataTable
     {
         return [
             Column::make('DT_RowIndex')->title(__('No'))->orderable(false)->searchable(false),
-            Column::make('af_name')->title('Name'),
+            Column::make('af_id')->title('Af ID'),
+            Column::make('af_name')->title('Af Name'),
             Column::make('email')->title('Email'),
             Column::make('af_level')->title('Level'),
             Column::make('total_commission')->title('Total Commission'),

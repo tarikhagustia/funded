@@ -74,6 +74,7 @@ class AffiliateCommissionTable extends DataTable
                     ->minifiedAjax()
                     ->orderBy(0, 'desc')
                     ->dom('Bfrtip')
+                    ->fixedHeader(true)
                     ->buttons(
                     // Button::make('create'),
                         Button::make('colvis'),
@@ -100,6 +101,7 @@ class AffiliateCommissionTable extends DataTable
             Column::make('comm_date')->title(__('Date')),
             Column::make('login')->title('Login'),
             Column::make('client_name')->title('Client Name'),
+            Column::make('af_id')->title('Af ID'),
             Column::make('af_name')->title('Af Name'),
             Column::make('af_percentage')->title('Af Percentage (%)'),
             Column::make('max_rebate')->title('Max Rebate (USD)'),

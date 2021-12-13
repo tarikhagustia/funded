@@ -41,8 +41,9 @@ class ClosedOrderTable extends DataTable
         $query = DB::connection('mt4')
                    ->table('MT4_TRADES', 'mt')
                    ->select([
-                       'TICKET', 'mt.CMD', 'mt.LOGIN', 'mt.SYMBOL', 'mt.OPEN_TIME', 'mt.CLOSE_TIME', 'mt.VOLUME', DB::raw('ROUND(VOLUME/100, 2) as LOT'), DB::raw('(TIME_TO_SEC(TIMEDIFF(mt.CLOSE_TIME, mt.OPEN_TIME)) / 60) as LQ_TIME')
+                       'TICKET', 'mt.CMD', 'mt.LOGIN', 'u.NAME', 'mt.SYMBOL', 'mt.OPEN_TIME', 'mt.CLOSE_TIME', 'mt.VOLUME', DB::raw('ROUND(VOLUME/100, 2) as LOT'), DB::raw('(TIME_TO_SEC(TIMEDIFF(mt.CLOSE_TIME, mt.OPEN_TIME)) / 60) as LQ_TIME')
                    ])
+                   ->join('MT4_USERS as u', 'u.LOGIN', '=', 'mt.LOGIN')
                    ->whereYear('mt.CLOSE_TIME', '!=', 1970)
                    ->where(DB::raw('(TIME_TO_SEC(TIMEDIFF(mt.CLOSE_TIME, mt.OPEN_TIME)) / 60)'), '<', 3)
                    ->whereIn('mt.CMD', [1, 0]);
@@ -97,6 +98,7 @@ class ClosedOrderTable extends DataTable
             // Column::make('DT_RowIndex')->title(__('No'))->orderable(false)->searchable(false),
             Column::make('TICKET')->name('mt.TICKET'),
             Column::make('LOGIN')->name('mt.LOGIN'),
+            Column::make('NAME')->name('u.NAME'),
             Column::make('SYMBOL')->name('mt.SYMBOL'),
             Column::make('LOT')->name('mt.LOT')->searchable(false)->orderable(false),
             Column::make('TYPE')->searchable(false)->orderable(false),

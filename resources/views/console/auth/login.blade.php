@@ -8,7 +8,7 @@
                     <div class="card-body">
                         <form action="{{ route('console.login') }}" method="post">
                             @csrf
-                            <img src="https://bullishfx.id/wp-content/uploads/2020/07/bullish-logo-2-e1594917801368.png" class="mb-2">
+                            <img src="{{ asset('images/logo.png') }}" class="mb-2 img-fluid" style="width: 150px"><span class="font-weight-bold text-danger">BETA</span>
                             <p class="text-muted">Hi, Admin! Login to your account</p>
                             <div class="input-group mb-3 form-group has-error">
                                 <div class="input-group-prepend">

@@ -42,6 +42,7 @@ class CommissionTable extends DataTable
             $query = DB::table($model->getTable())
                        ->select(
                            [
+                               'af_id',
                                'af_name',
                                DB::raw('SUM(new_account) as new_account'),
                                DB::raw('SUM(lot) as total_lot'),
@@ -70,6 +71,7 @@ class CommissionTable extends DataTable
                        ->select(
                            [
                                'login',
+                               'client_name',
                                DB::raw('SUM(new_account) as new_account'),
                                DB::raw('SUM(lot) as total_lot'),
                                DB::raw('SUM(comm_idr) as comm_idr'),
@@ -148,7 +150,7 @@ class CommissionTable extends DataTable
                             i : 0;
                 };
 
-                let sum_columns  = [1,2,3,4,5,6,7,8,9,10,11,12,13,14];
+                let sum_columns  = [2,3,4,5,6,7,8,9,10,11,12,13,14,15];
                 sum_columns.forEach(function(val, index){
                     // Total over all pages
                     total = api
@@ -187,7 +189,7 @@ class CommissionTable extends DataTable
                             i : 0;
                 };
             
-                let sum_columns  = [7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24];
+                let sum_columns  = [8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25];
                 sum_columns.forEach(function(val, index){
                     // Total over all pages
                     total = api
@@ -238,6 +240,7 @@ class CommissionTable extends DataTable
             Column::make('rate'),
             Column::make('ac_type'),
             Column::make('max_rebate'),
+            Column::make('af_id'),
             Column::make('af_name'),
             Column::make('lot'),
             Column::make('comm'),
@@ -270,21 +273,22 @@ class CommissionTable extends DataTable
     {
         return [
             // Column::make('DT_RowIndex')->title(__('No'))->orderable(false)->searchable(false),
+            Column::make('af_id'),
             Column::make('af_name'),
             Column::make('new_account'),
-            Column::make('total_lot'),
-            Column::make('comm_idr'),
-            Column::make('or_idr'),
-            Column::make('bop_idr'),
-            Column::make('total_rebate'),
-            Column::make('prev_equity'),
-            Column::make('net_margin_in_out'),
-            Column::make('current_equity'),
-            Column::make('credit'),
-            Column::make('profit_loss'),
-            Column::make('net_profit_loss'),
-            Column::make('agent_pl'),
-            Column::make('holding_pl'),
+            Column::make('total_lot')->searchable(false),
+            Column::make('comm_idr')->searchable(false),
+            Column::make('or_idr')->searchable(false),
+            Column::make('bop_idr')->searchable(false),
+            Column::make('total_rebate')->searchable(false),
+            Column::make('prev_equity')->searchable(false),
+            Column::make('net_margin_in_out')->searchable(false),
+            Column::make('current_equity')->searchable(false),
+            Column::make('credit')->searchable(false),
+            Column::make('profit_loss')->searchable(false),
+            Column::make('net_profit_loss')->searchable(false),
+            Column::make('agent_pl')->searchable(false),
+            Column::make('holding_pl')->searchable(false),
             // Column::make('login'),
             // Column::make('client_name'),
             // Column::make('rate'),
@@ -323,6 +327,7 @@ class CommissionTable extends DataTable
         return [
             // Column::make('DT_RowIndex')->title(__('No'))->orderable(false)->searchable(false),
             Column::make('login'),
+            Column::make('client_name'),
             Column::make('new_account'),
             Column::make('total_lot')->searchable(false),
             Column::make('comm_idr')->searchable(false),
