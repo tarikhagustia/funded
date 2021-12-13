@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DataTables\Console\Report;
+namespace App\DataTables\Af;
 
 use App\Models\NetMarginBonus;
 use Yajra\DataTables\Html\Button;
@@ -10,6 +10,7 @@ use Yajra\DataTables\Html\Builder;
 use Yajra\DataTables\DataTableAbstract;
 use Carbon\Carbon;
 use App\Models\ReferralBonus;
+use Illuminate\Support\Facades\Auth;
 
 class NetMarginBonusTable extends DataTable
 {
@@ -38,7 +39,7 @@ class NetMarginBonusTable extends DataTable
      */
     public function query(NetMarginBonus $model)
     {
-        $query = $model->newQuery();
+        $query = $model->newQuery()->where('af_id', Auth::id());
         $tmpDate = explode(' - ', request()->input('range'));
         if (count($tmpDate) == 2) {
             $dateStart = Carbon::parse($tmpDate[0])->startOfDay();
@@ -57,24 +58,23 @@ class NetMarginBonusTable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->setTableId('referral-bonus-table')
-            ->columns($this->getColumns())
-            ->minifiedAjax()
-            ->fixedHeader(true)
-            ->orderBy(0, 'desc')
-            ->dom('Bfrtip')
-            ->buttons(
-                // Button::make('create'),
-                Button::make('colvis'),
-                Button::make('pageLength'),
-                Button::make('export'),
-                Button::make('print')
-            )
-            ->ajax([
-                'data' => 'function(d) { 
+                    ->setTableId('commission-table')
+                    ->columns($this->getColumns())
+                    ->minifiedAjax()
+                    ->orderBy(1, 'desc')
+                    ->dom('Bfrtip')
+                    ->buttons(
+                    // Button::make('create'),
+                        Button::make('colvis'),
+                        Button::make('pageLength'),
+                        Button::make('export'),
+                        Button::make('print')
+                    )
+                    ->ajax([
+                        'data' => 'function(d) { 
                             d.range = $("#reportrange span").html();
                         }'
-            ]);
+                    ]);
     }
 
     /**
@@ -112,6 +112,6 @@ class NetMarginBonusTable extends DataTable
      */
     protected function filename()
     {
-        return 'ReferralBonus' . date('YmdHis');
+        return 'ReferralBonus'.date('YmdHis');
     }
 }

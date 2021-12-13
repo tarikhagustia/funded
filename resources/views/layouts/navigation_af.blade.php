@@ -26,7 +26,8 @@
                 {{ __('My Commission') }}</a>
             <ul class="c-sidebar-nav-dropdown-items">
                 <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('comm.realtime') }}">{{ __('Commission') }}</a></li>
-                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('comm.referral_bonus') }}">{{ __('Referral Commission') }}</a></li>
+                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('comm.referral_bonus') }}">{{ __('Referral Bonus') }}</a></li>
+                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('comm.net_margin_bonus') }}">{{ __('Net Margin Bonus') }}</a></li>
             </ul>
         </li>
         @if(auth()->user()->level_on_group == 4 || (auth()->user()->parent && auth()->user()->parent->level_on_group == 4))
