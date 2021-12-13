@@ -23,6 +23,7 @@ class CreateNetMarginBonusesTable extends Migration
             $table->double('total_lot', 11);
             $table->double('total_member', 11);
             $table->double('total_commission', 11);
+            $table->string('addendum')->nullable();
             $table->string('status')->index();
             $table->timestamps();
         });
