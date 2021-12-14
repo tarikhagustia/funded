@@ -26,6 +26,7 @@
                 {{ __('My Commission') }}</a>
             <ul class="c-sidebar-nav-dropdown-items">
                 <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('comm.realtime') }}">{{ __('Commission') }}</a></li>
+                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('comm.nmi') }}">{{ __('Net Margin In Out') }}</a></li>
                 <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('comm.referral_bonus') }}">{{ __('Referral Bonus') }}</a></li>
                 <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('comm.net_margin_bonus') }}">{{ __('Net Margin Bonus') }}</a></li>
             </ul>
