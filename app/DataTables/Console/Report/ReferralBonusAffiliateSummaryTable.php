@@ -88,8 +88,8 @@ class ReferralBonusAffiliateSummaryTable extends DataTable
         return [
             Column::make('DT_RowIndex')->title(__('No'))->orderable(false)->searchable(false),
             Column::make('af_name')->title('Af Name'),
-            Column::make('total_lot')->title('Total Lot'),
-            Column::make('total_commission')->title('Total Commission'),
+            Column::make('total_lot')->title('Total Lot')->searchable(false),
+            Column::make('total_commission')->title('Total Commission')->searchable(false),
             // Column::make('lot')->orderable(false)->searchable(false)->title('Lot'),
             // Column::make('total_commission')->orderable(false)->searchable(false)->title('Total Commission'),
 
