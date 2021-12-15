@@ -30,9 +30,9 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // Jam 10 Waktu UTC
-        $schedule->command('transaction:get')->dailyAt('22:00');
-        $schedule->command('af:commission:get')->dailyAt('22:00');
-        $schedule->command('af:commission:referral:get')->dailyAt('22:00');
+        $schedule->command('transaction:get')->dailyAt('23:00');
+        $schedule->command('af:commission:get')->dailyAt('23:00');
+        $schedule->command('af:commission:referral:get')->dailyAt('23:00');
         // $schedule->command('member:fix:tree')->everyTenMinutes();
     }
 
