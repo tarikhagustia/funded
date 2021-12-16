@@ -91,14 +91,14 @@ class CommissionReportByCountryManager extends DataTable
             Column::make('id', 'a.id')->title(__('Af ID')),
             Column::make('agentname', 'a.agentname')->title(__('Af Name')),
             Column::make('level_on_group', 'a.level_on_group')->title(__('Af Level')),
-            Column::make('lot')->title(__('Lot')),
-            Column::make('comm')->title(__('comm')),
-            Column::make('comm_idr')->title(__('comm_idr')),
-            Column::make('or')->title(__('or')),
-            Column::make('bop')->title(__('bop')),
-            Column::make('bop_idr')->title(__('bop_idr')),
-            Column::make('net_margin_in_out')->title(__('net_margin_in_out')),
-            Column::make('profit_loss')->title(__('profit_loss')),
+            Column::make('lot')->title(__('Lot'))->searchable(false),
+            Column::make('comm')->title(__('Comm'))->searchable(false),
+            Column::make('comm_idr')->title(__('Comm IDR'))->searchable(false),
+            Column::make('or')->title(__('Or'))->searchable(false),
+            Column::make('bop')->title(__('Bop'))->searchable(false),
+            Column::make('bop_idr')->title(__('Bop IDR'))->searchable(false),
+            Column::make('net_margin_in_out')->title(__('Net Margin In Out'))->searchable(false),
+            Column::make('profit_loss')->title(__('Profit Loss'))->searchable(false),
             // Column::computed('action')
             //       ->exportable(false)
             //       ->printable(false)
