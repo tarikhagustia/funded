@@ -19,7 +19,9 @@ class CommissionCalculationService
                            ->join('fix_rates as r', 'r.id', '=', 'a.currencyid')
                            ->join('clients as c', 'c.id', '=', 'a.userid')
                            ->join('agents_code as ac', 'ac.id', '=', 'a.comm_id')
-                           ->join('agents as ag', 'ag.id', '=', 'ac.ref_id')->get();
+                           ->join('agents as ag', 'ag.id', '=', 'ac.ref_id')
+                           ->where('a.accountid', 8014672)
+                           ->get();
 
 
         // Get MetaTrader Information
@@ -29,6 +31,8 @@ class CommissionCalculationService
                       ->whereIn('u.LOGIN', $queryAccounts->pluck('accountid'))
                       ->whereBetween('t.CLOSE_TIME', [$date->format('Y-m-d').' 00:00:00', $date->format('Y-m-d').' 23:59:59'])
                       ->groupBy('t.LOGIN')->get()->keyBy('LOGIN');
+
+            
 
 
         // Get daily transaction
@@ -52,7 +56,8 @@ class CommissionCalculationService
             $tradeData = isset($queryLot[(int)$row->accountid]) ? $queryLot[(int)$row->accountid] : null;
             $dailyData = isset($queryDaily[(int)$row->accountid]) ? $queryDaily[(int)$row->accountid] : null;
             $prevData = isset($queryDailyPrev[(int)$row->accountid]) ? $queryDailyPrev[(int)$row->accountid] : null;
-            if (!$tradeData || !$dailyData || !$prevData) return [];
+            // Bug fix if prev data was null, then set it to zero
+            if (!$tradeData || !$dailyData) return [];
             $q = new \stdClass();
             $q->transaction_date = $date->format('Y-m-d');
             $q->af_code = $row->agent_id;
@@ -72,7 +77,7 @@ class CommissionCalculationService
             $q->bop_idr = $q->lot * $q->bop * $q->rate;
             $q->comm_idr = $q->lot * $q->comm * $q->rate;
             $q->total_rebate = $q->comm_idr + $q->or_idr + $q->bop_idr;
-            $q->prev_equity = floatval($prevData->EQUITY);
+            $q->prev_equity = floatval($prevData->EQUITY ?? 0);
             $q->net_margin_in_out = $dailyData->DEPOSIT;
             $q->current_equity = floatval($dailyData->EQUITY);
             $q->credit = floatval($dailyData->CREDIT);
