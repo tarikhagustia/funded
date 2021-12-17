@@ -20,7 +20,6 @@ class CommissionCalculationService
                            ->join('clients as c', 'c.id', '=', 'a.userid')
                            ->join('agents_code as ac', 'ac.id', '=', 'a.comm_id')
                            ->join('agents as ag', 'ag.id', '=', 'ac.ref_id')
-                           ->where('a.accountid', 8014672)
                            ->get();
 
 
