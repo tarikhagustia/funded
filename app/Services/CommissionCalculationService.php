@@ -29,6 +29,7 @@ class CommissionCalculationService
                       ->select(['u.REGDATE', 'u.LOGIN', 'u.GROUP', 'u.NAME', 'u.CREDIT', 'u.EQUITY', 'u.BALANCE', DB::raw('SUM(t.VOLUME / 100) as LOT')])
                       ->join('MT4_USERS as u', 'u.LOGIN', '=', 't.LOGIN')
                       ->whereIn('u.LOGIN', $queryAccounts->pluck('accountid'))
+                      ->whereIn('CMD', [1,0])
                       ->whereBetween('t.CLOSE_TIME', [$date->format('Y-m-d').' 00:00:00', $date->format('Y-m-d').' 23:59:59'])
                       ->groupBy('t.LOGIN')->get()->keyBy('LOGIN');
 
