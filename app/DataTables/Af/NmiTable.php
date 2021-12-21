@@ -11,6 +11,7 @@ use Yajra\DataTables\DataTableAbstract;
 use Carbon\Carbon;
 use App\Models\ReferralBonus;
 use App\Models\Transaction;
+use App\Repositories\NetMarginInOutRepository;
 use Illuminate\Support\Facades\Auth;
 
 class NmiTable extends DataTable
@@ -38,9 +39,9 @@ class NmiTable extends DataTable
      * @param Console/User $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Transaction $model)
+    public function query(NetMarginInOutRepository $netMarginInOutRepository)
     {
-        $query = $model->newQuery()->where('af_id', auth()->id());
+        $query = $netMarginInOutRepository->getNetMarginInOutQuery(auth()->user());
         $tmpDate = explode(' - ', request()->input('range'));
         if (count($tmpDate) == 2) {
             $dateStart = Carbon::parse($tmpDate[0])->startOfDay();
