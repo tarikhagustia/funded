@@ -62,7 +62,7 @@ class CommissionCalculationService
             $q->transaction_date = $date->format('Y-m-d');
             $q->af_code = $row->agent_id;
             $q->login = $row->accountid;
-            $q->new_account = $date->format('Y-m-d') == $tradeData->REGDATE ? 1 : 0;
+            $q->new_account = $date->format('Y-m-d') == Carbon::parse($tradeData->REGDATE)->format('Y-m-d') ? 1 : 0;
             $q->meta_group = $tradeData->GROUP;
             $q->client_name = $tradeData->NAME;
             $q->rate = $row->rate;
