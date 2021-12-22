@@ -13,7 +13,7 @@ class AfPerformanceCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'af:performance {date} {dateTo}';
+    protected $signature = 'af:performance {date?} {dateTo?}';
 
     /**
      * The console command description.
@@ -45,8 +45,11 @@ class AfPerformanceCommand extends Command
         $commDate = $this->argument('date');
         $commDateTo = $this->argument('dateTo');
 
-        $result = $this->afPerformanceService->generatePerformanceData($commDate, $commDateTo);
+        if ($commDate) {
+            $result = $this->afPerformanceService->generatePerformanceData($commDate, $commDateTo);
+        } else {
+            $result = $this->afPerformanceService->generatePerformanceData(now()->subMonth()->startOfMonth(), now()->subMonth()->endOfMonth());
+        }
         return ($result) ? 0 : 1;
-       
     }
 }

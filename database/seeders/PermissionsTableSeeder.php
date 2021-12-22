@@ -40,7 +40,7 @@ class PermissionsTableSeeder extends Seeder
     {
         return [
             'Client', 'Trading Account', 'Affiliate', 'Users', 'Roles', 'General Commission', 'Report Top Looser', 'Top Commission and OR Producer',
-            'Top New Member Producer', 'Top Gainer', 'Last Member Transaction', 'Symbol Statistic', 'Closed Order By LQ Time', 'Affiliate Commission', 'Tree View', 'Operating Cost', 'Referral Bonus', 'Net Margin Bonus', 'Allowance'
+            'Top New Member Producer', 'Top Gainer', 'Last Member Transaction', 'Symbol Statistic', 'Closed Order By LQ Time', 'Affiliate Commission', 'Tree View', 'Operating Cost', 'Referral Bonus', 'Net Margin Bonus', 'Allowance', 'Performance Report'
         ];
     }
 
