@@ -46,7 +46,7 @@ class AfPerformanceCommand extends Command
         $commDateTo = $this->argument('dateTo');
 
         if ($commDate) {
-            $result = $this->afPerformanceService->generatePerformanceData($commDate, $commDateTo);
+            $result = $this->afPerformanceService->generatePerformanceData(Carbon::parse($commDate), Carbon::parse($commDateTo));
         } else {
             $result = $this->afPerformanceService->generatePerformanceData(now()->subMonth()->startOfMonth(), now()->subMonth()->endOfMonth());
         }
