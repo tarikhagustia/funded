@@ -9,7 +9,7 @@ class MetaTrade extends Model
     protected $connection = "mt4";
     protected $primaryKey = "TICKET";
     public $timestamps = false;
-    protected $table = "mt4_trades";
+    protected $table = "MT4_TRADES";
 
     protected $dates = [
         'CLOSE_TIME'
